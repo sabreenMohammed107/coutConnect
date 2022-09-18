@@ -259,7 +259,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Calendar</span>
+                                <span class="menu-title">Test</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -279,7 +279,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Components</span>
+                                <span class="menu-title">Test</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -294,7 +294,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Documentation</span>
+                                <span class="menu-title">Test</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -309,7 +309,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Changelog
+                                <span class="menu-title">Test
                                 <span class="badge badge-changelog badge-light-danger bg-hover-danger text-hover-white fw-bold fs-9 px-2 ms-2">v1.0.11</span></span>
                             </a>
                         </div>
