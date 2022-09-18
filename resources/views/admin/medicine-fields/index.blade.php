@@ -6,14 +6,14 @@
             <!--begin::Info-->
             <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
                 <!--begin::Title-->
-                <h1 class="text-dark fw-bolder my-1 fs-2">Medicine Feild</h1>
+                <h1 class="text-dark fw-bolder my-1 fs-2">Medicine Field</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb fw-bold fs-base my-1">
                     <li class="breadcrumb-item text-muted">
                         <a href="../dist/index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
-                    <li class="breadcrumb-item text-muted">Medicine Feild</li>
+                    <li class="breadcrumb-item text-muted">Medicine Field</li>
 
                     <li class="breadcrumb-item text-dark">All</li>
                 </ul>
@@ -60,7 +60,7 @@
                     <div class="card-toolbar">
                         <!--begin::Add customer-->
                         <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_new_target">Add Feild</a>
+                            data-bs-target="#kt_modal_new_target">Add Field</a>
 
                         <!--end::Add customer-->
                     </div>
@@ -84,7 +84,7 @@
                                 </th>
                                 <th class="min-w-150px">image</th>
                                 <th class="min-w-250px">Name</th>
-                                <th class="min-w-150px">Order</th>
+                                <th class="min-w-150px">field_overview</th>
 
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -133,7 +133,7 @@
                                         <div class="d-flex">
 <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
 
-                                            <span class="symbol-label">{{ $row->order }}</span>
+                                            <span class="symbol-label">{{ $row->field_overview }}</span>
 
                                         </div>
 
@@ -224,7 +224,7 @@
                                                         <!--begin::Heading-->
                                                         <div class="mb-13 text-center">
                                                             <!--begin::Title-->
-                                                            <h1 class="mb-3">Update Medicine Feild</h1>
+                                                            <h1 class="mb-3">Update Medicine Field</h1>
                                                             <!--end::Title-->
 
                                                         </div>
@@ -276,35 +276,35 @@
                                                         <div class="d-flex flex-column mb-8 fv-row">
                                                             <!--begin::Label-->
                                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                                <span class="required">Feild Name</span>
+                                                                <span class="required">Field Name</span>
                                                                 <i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                                    data-bs-toggle="tooltip" title="Enter Feild Name"></i>
+                                                                    data-bs-toggle="tooltip" title="Enter Field Name"></i>
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                placeholder="Enter Feild Name" name="field_enname" value="{{$row->field_enname}}" />
+                                                                placeholder="Enter Field Name" name="field_enname" value="{{$row->field_enname}}" />
                                                         </div>
                                                         <!--end::Input group-->
 
                                                         <!--begin::Input group-->
                                                         <div class="d-flex flex-column mb-8">
-                                                            <label class="fs-6 fw-bold mb-2">Feild Overview</label>
+                                                            <label class="fs-6 fw-bold mb-2">Field Overview</label>
                                                             <textarea class="form-control form-control-solid" rows="3" name="field_overview"
-                                                                placeholder="Type Feild Overview">{{$row->field_overview}}</textarea>
+                                                                placeholder="Type Field Overview">{{$row->field_overview}}</textarea>
                                                         </div>
                                                         <!--end::Input group-->
-                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                        {{-- <div class="d-flex flex-column mb-8 fv-row">
                                                             <!--begin::Label-->
                                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                                <span class="required">Feild Order</span>
+                                                                <span class="required">Field Order</span>
                                                                 <i class="fas fa-exclamation-circle ms-2 fs-7"
                                                                     data-bs-toggle="tooltip"
-                                                                    title="Specify Feild Order"></i>
+                                                                    title="Specify Field Order"></i>
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="number" class="form-control form-control-solid"
-                                                                placeholder="Enter Feild Order" value="{{$row->order}}" name="order" />
-                                                        </div>
+                                                                placeholder="Enter Field Order" value="{{$row->order}}" name="order" />
+                                                        </div> --}}
                                                         <!--end::Input group-->
 
 
@@ -383,7 +383,7 @@
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3">Set Medicine Feild</h1>
+                            <h1 class="mb-3">Set Medicine Field</h1>
                             <!--end::Title-->
 
                         </div>
@@ -449,34 +449,34 @@
                         <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Feild Name</span>
+                                <span class="required">Field Name</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                    title="Enter Feild Name"></i>
+                                    title="Enter Field Name"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Enter Feild Name"
+                            <input type="text" class="form-control form-control-solid" placeholder="Enter Field Name"
                                 name="field_enname" />
                         </div>
                         <!--end::Input group-->
 
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-8">
-                            <label class="fs-6 fw-bold mb-2">Feild Overview</label>
+                            <label class="fs-6 fw-bold mb-2">Field Overview</label>
                             <textarea class="form-control form-control-solid" rows="3" name="field_overview"
-                                placeholder="Type Feild Overview"></textarea>
+                                placeholder="Type Field Overview"></textarea>
                         </div>
                         <!--end::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        {{-- <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Feild Order</span>
+                                <span class="required">Field Order</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                    title="Specify Feild Order"></i>
+                                    title="Specify Field Order"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="number" class="form-control form-control-solid" placeholder="Enter Feild Order"
+                            <input type="number" class="form-control form-control-solid" placeholder="Enter Field Order"
                                 name="order" />
-                        </div>
+                        </div> --}}
                         <!--end::Input group-->
 
 

@@ -5,8 +5,8 @@
             <div class="aside-logo flex-column-auto pt-9 pb-5" id="kt_aside_logo">
                 <!--begin::Logo-->
                 <a href="#">
-                    <img alt="Logo" src="{asset('dist/assets/media/logos/logo-default.svg')}}" class="max-h-50px logo-default" />
-                    <img alt="Logo" src="{asset('dist/assets/media/logos/logo-minimize.svg')}}" class="max-h-50px logo-minimize" />
+                    <img alt="Logo" src="{{asset('img/coatlogo.png')}}" class="max-h-50px logo-default" />
+                    <img alt="Logo" src="{{asset('img/coatlogo.png')}}" class="max-h-50px logo-minimize" />
                 </a>
                 <!--end::Logo-->
             </div>
@@ -91,7 +91,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Basics</span>
+                                <span class="menu-title">General Setup</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion">
@@ -100,7 +100,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">medicine_fields</span>
+                                        <span class="menu-title">Medical Fields</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -108,7 +108,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Categories</span>
+                                        <span class="menu-title">Events Types</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -116,7 +116,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Specializations</span>
+                                        <span class="menu-title">Med. Specializations</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -154,7 +154,7 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Organizers</span>
+                            <span class="menu-title">Business Pages</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <div class="menu-sub menu-sub-accordion">
@@ -163,7 +163,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Organizers list</span>
+                                    <span class="menu-title">Business Pages list</span>
                                 </a>
                             </div>
 
@@ -172,7 +172,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Add Organizer</span>
+                                    <span class="menu-title">Add Business Page</span>
                                 </a>
                             </div>
 
@@ -247,7 +247,7 @@
 
 
                         <div class="menu-item">
-                            <a class="menu-link" href="../dist/apps/calendar.html">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -268,7 +268,7 @@
                             </div>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../dist/documentation/base/utilities.html">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen009.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -283,7 +283,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../dist/documentation/getting-started.html">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -298,7 +298,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../dist/documentation/getting-started/changelog.html">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/coding/cod003.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -310,7 +310,6 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <span class="menu-title">Test
-                                <span class="badge badge-changelog badge-light-danger bg-hover-danger text-hover-white fw-bold fs-9 px-2 ms-2">v1.0.11</span></span>
                             </a>
                         </div>
                     </div>
@@ -320,7 +319,7 @@
             <!--end::Aside menu-->
             <!--begin::Footer-->
             <div class="aside-footer flex-column-auto pb-5 d-none" id="kt_aside_footer">
-                <a href="../dist/index.html" class="btn btn-light-primary w-100">Button</a>
+                <a href="#" class="btn btn-light-primary w-100">Button</a>
             </div>
             <!--end::Footer-->
         </div>

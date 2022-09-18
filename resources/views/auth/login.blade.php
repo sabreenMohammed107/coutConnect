@@ -54,10 +54,10 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
-									<h1 class="text-dark mb-3">Sign In to Cout Connect</h1>
+									<h1 class="text-dark mb-3">Sign In to Coat Connect</h1>
 									<!--end::Title-->
 									<!--begin::Link-->
-									<div class="text-gray-400 fw-bold fs-4">New Here?
+									{{-- <div class="text-gray-400 fw-bold fs-4">New Here?
                                         @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
 
@@ -66,7 +66,7 @@ License: For each use you must have a valid license purchased only from above li
                         @endif
 
                 </div>
-            @endif
+            @endif --}}
 
 									<!--end::Link-->
 								</div>

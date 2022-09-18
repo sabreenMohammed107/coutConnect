@@ -41,16 +41,15 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Info-->
                 <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
                     <!--begin::Title-->
-                    <h1 class="text-dark fw-bolder my-1 fs-2">Categories</h1>
+                    <h1 class="text-dark fw-bolder my-1 fs-2">Dashboard</h1>
                     <!--end::Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb fw-bold fs-base my-1">
                         <li class="breadcrumb-item text-muted">
-                            <a href="../dist/index.html" class="text-muted text-hover-primary">Home</a>
+                            <a href="#" class="text-muted text-hover-primary">Home</a>
                         </li>
-                        <li class="breadcrumb-item text-muted">eCommerce</li>
-                        <li class="breadcrumb-item text-muted">Catalog</li>
-                        <li class="breadcrumb-item text-dark">Categories</li>
+                        <li class="breadcrumb-item text-muted">dashboard</li>
+
                     </ul>
                     <!--end::Breadcrumb-->
                 </div>

@@ -84,7 +84,7 @@
                                 </th>
                                 <th class="min-w-150px">image</th>
                                 <th class="min-w-250px">Name</th>
-                                <th class="min-w-150px">Order</th>
+                                <th class="min-w-150px">Overview</th>
 
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -133,7 +133,7 @@
                                         <div class="d-flex">
 <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
 
-                                            <span class="symbol-label">{{ $row->order }}</span>
+                                            <span class="symbol-label">{{ $row->category_overview }}</span>
 
                                         </div>
 
@@ -293,7 +293,7 @@
                                                                 placeholder="Type Category Overview">{{$row->category_overview}}</textarea>
                                                         </div>
                                                         <!--end::Input group-->
-                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                        {{-- <div class="d-flex flex-column mb-8 fv-row">
                                                             <!--begin::Label-->
                                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                                                 <span class="required">Category Order</span>
@@ -304,7 +304,7 @@
                                                             <!--end::Label-->
                                                             <input type="number" class="form-control form-control-solid"
                                                                 placeholder="Enter Category Order" value="{{$row->order}}" name="order" />
-                                                        </div>
+                                                        </div> --}}
                                                         <!--end::Input group-->
 
 
@@ -383,7 +383,7 @@
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3">Set Category Feild</h1>
+                            <h1 class="mb-3">Set Category Field</h1>
                             <!--end::Title-->
 
                         </div>
@@ -466,7 +466,7 @@
                                 placeholder="Type Category Overview"></textarea>
                         </div>
                         <!--end::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        {{-- <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Category Order</span>
@@ -476,7 +476,7 @@
                             <!--end::Label-->
                             <input type="number" class="form-control form-control-solid" placeholder="Enter Category Order"
                                 name="order" />
-                        </div>
+                        </div> --}}
                         <!--end::Input group-->
 
 

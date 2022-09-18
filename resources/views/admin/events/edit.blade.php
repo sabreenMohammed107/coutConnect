@@ -92,7 +92,7 @@
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
-                                href="#kt_ecommerce_add_product_advanced">Specialzation</a>
+                                href="#kt_ecommerce_add_product_advanced">Specialization</a>
                         </li>
                         <!--end:::Tab item-->
 
@@ -329,7 +329,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Specialzation</h2>
+                                            <h2>Specialization</h2>
                                         </div>
                                     </div>
                                     <!--end::Card header-->
@@ -338,7 +338,7 @@
                                         <!--begin::Input group-->
                                         <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
                                             <!--begin::Label-->
-                                            <label class="form-label">Add Specialzation</label>
+                                            <label class="form-label">Add Specialization</label>
                                             <!--end::Label-->
 
 
