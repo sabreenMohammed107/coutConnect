@@ -155,12 +155,12 @@ class EventController extends Controller
         $eventMedicines = $event->medicines->all();
         $eventcategories = $event->categories->all();
         $eventTags = $event->tags->all();
-        $eventSpecialzation = Events_specialzations_fees::all();
+        $eventSpecialzation = Events_specialzations_fees::where('event_id', $event->id)->get();
         $medicines = Medicine_field::all();
         $categories = Category::all();
         $specialzations = Specialzation::all();
         $tags = Tag::all();
-        $eventDays = Event_days::all();
+        $eventDays = Event_days::where('event_id', $event->id)->get();
         return view($this->viewName . 'edit', compact(['event', 'cities', 'organizers', 'eventMedicines', 'eventcategories', 'eventSpecialzation', 'eventTags', 'medicines', 'categories', 'tags', 'specialzations', 'eventDays']));
     }
 
@@ -226,38 +226,39 @@ class EventController extends Controller
             \Log::info($specialzationsList);
             foreach ($specialzationsList as $index => $opt) {
                 // if(count($updatedList)>0){
-                    foreach ($updatedList as $updatedId) {
+                foreach ($updatedList as $updatedId) {
 
-                        $specialFees = Events_specialzations_fees::where('specialize_id', '=', $updatedId)->first();
-                        if ($updatedId == (int) $specialzationsList[$index]['specialize_id']) {
-                            $specialFees->fees = $specialzationsList[$index]['fees'];
+                    $specialFees = Events_specialzations_fees::where('specialize_id', '=', $updatedId)->where('event_id', '=', $event->id)->first();
+                    if ($updatedId == (int) $specialzationsList[$index]['specialize_id']) {
+                        $specialFees->fees = $specialzationsList[$index]['fees'];
 
-                            $specialFees->update();
-                        }
+                        $specialFees->update();
 
                     }
 
-
+                }
 
             }
 
             //update days
 
             $daysList = $request->kt_docs_repeater_basic;
-             $updatedDaysList = Event_days::where('event_id', $event->id)->get();
-            \Log::info(["message",$daysList]);
+            $updatedDaysList = Event_days::where('event_id', $event->id)->get();
+            \Log::info(["message", $daysList]);
+            if ($updatedDaysList) {
+                foreach ($updatedDaysList as $index => $update) {
 
-            foreach ($updatedDaysList as $index => $update) {
+                    foreach ($daysList as $index => $opt) {
+                        if (($update->event_date_from != $daysList[$index]['event_date_from']) && ($update->event_date_to != $daysList[$index]['event_date_to'])) {
+                            $update->delete();
 
-                foreach ($daysList as $index => $opt) {
-                if(( $update->event_date_from != $daysList[$index]['event_date_from']) && ( $update->event_date_to !=$daysList[$index]['event_date_to']  ) ){
-                    $update->delete();
+                        }
+                    }
 
                 }
-        }
+            }
 
-    }
-            if($daysList){
+            if ($daysList) {
                 foreach ($daysList as $index => $opt) {
 
                     $evDay = Event_days::firstOrNew([
@@ -267,22 +268,17 @@ class EventController extends Controller
 
                     ]);
 
+                    $evDay->event_date_from = $daysList[$index]['event_date_from'];
+                    $evDay->event_date_to = $daysList[$index]['event_date_to'];
+                    $evDay->event_id = $event->id;
 
-                        $evDay->event_date_from = $daysList[$index]['event_date_from'];
-                        $evDay->event_date_to = $daysList[$index]['event_date_to'];
-                        $evDay->event_id = $event->id;
-
-                        $evDay->save();
-
+                    $evDay->save();
 
 
 
 
                 }
             }
-
-
-
 
             DB::commit();
             //Enable foreign key checks!

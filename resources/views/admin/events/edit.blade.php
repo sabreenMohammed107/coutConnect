@@ -534,11 +534,11 @@
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
                                                                     <label class="form-label">Date From:</label>
-                                                                    <input class="form-control form-control-solid dPick" placeholder="Pick date & time" id="kt_datepicker_3"/>
+                                                                    <input class="form-control form-control-solid dPick" name="event_date_from" placeholder="Pick date & time" id="kt_datepicker_3"/>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label class="form-label">Date To:</label>
-                                                                    <input class="form-control form-control-solid dPick" placeholder="Pick date & time" id="kt_datepicker_4"/>
+                                                                    <input class="form-control form-control-solid dPick" name="event_date_to" placeholder="Pick date & time" id="kt_datepicker_4"/>
                                                                 </div>
 
                                                                 <div class="col-md-4">
