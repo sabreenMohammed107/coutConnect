@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedicineFieldController;
 use App\Http\Controllers\OrganizerController;
@@ -94,6 +95,8 @@ Route::group(['middleware' => ['auth', 'user-access:admin'], 'prefix' => 'dashbo
     Route::resource('organizers', OrganizerController::class);
  //events
  Route::resource('events', EventController::class);
+  //doctors
+  Route::resource('doctors', DoctorController::class);
 // //how-register
 //     Route::resource('/how-register', HowRegisterController::class);
 // //faq
@@ -105,8 +108,8 @@ Route::group(['middleware' => ['auth', 'user-access:admin'], 'prefix' => 'dashbo
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
+Route::middleware(['auth', 'user-access:organizer'])->group(function () {
 
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    Route::get('/organizer/home', [HomeController::class, 'organizerHome'])->name('organizer.home');
 
 });

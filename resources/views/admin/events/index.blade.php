@@ -85,8 +85,8 @@
                                     </div>
                                 </th>
                                 <th class="min-w-200px">Event</th>
-                                <th class="text-end min-w-100px">Date</th>
-                                <th class="text-end min-w-100px">Time</th>
+                                {{-- <th class="text-end min-w-100px">Date</th> --}}
+                                {{-- <th class="text-end min-w-100px">Time</th> --}}
                                 <th class="text-end min-w-70px">Fees</th>
                                 <th class="text-end min-w-100px">City</th>
 
@@ -129,16 +129,16 @@
         </td>
         <!--end::Category=-->
          <!--begin::SKU=-->
-         <td class="text-end pe-0">
+         {{-- <td class="text-end pe-0">
 
             <span class="fw-bolder">{{ $row->event_date_form }}</span>
-        </td>
+        </td> --}}
         <!--end::SKU=-->
         <!--begin::SKU=-->
-        <td class="text-end pe-0">
+        {{-- <td class="text-end pe-0">
             <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
             <span class="fw-bolder">{{ $row->event_time_form }}</span>
-        </td>
+        </td> --}}
         <!--end::SKU=-->
         <!--begin::Qty=-->
         <td class="text-end pe-0" data-order="15">

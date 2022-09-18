@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Event;
 use App\Models\Events_specialzations_fees;
+use App\Models\Event_days;
 use App\Models\Medicine_field;
 use App\Models\Organizer;
 use App\Models\Specialzation;
@@ -159,8 +160,8 @@ class EventController extends Controller
         $categories = Category::all();
         $specialzations = Specialzation::all();
         $tags = Tag::all();
-
-        return view($this->viewName . 'edit', compact(['event', 'cities', 'organizers', 'eventMedicines', 'eventcategories', 'eventSpecialzation', 'eventTags', 'medicines', 'categories', 'tags', 'specialzations']));
+        $eventDays = Event_days::all();
+        return view($this->viewName . 'edit', compact(['event', 'cities', 'organizers', 'eventMedicines', 'eventcategories', 'eventSpecialzation', 'eventTags', 'medicines', 'categories', 'tags', 'specialzations', 'eventDays']));
     }
 
     /**
@@ -214,30 +215,74 @@ class EventController extends Controller
                 array_push($spicialIds, $specialize_id);
 
             }
-\Log::info($spicialIds);
+            \Log::info($spicialIds);
             //update special-fees
-
-
 
             $event->specialzations()->sync($spicialIds);
 
 // then
             $updatedList = $event->specialzations()->pluck('specialize_id')->toArray(); // [1,2,3]
-\Log::info($updatedList);
-\Log::info($specialzationsList);
+            \Log::info($updatedList);
+            \Log::info($specialzationsList);
             foreach ($specialzationsList as $index => $opt) {
-                foreach ($updatedList as $updatedId) {
+                // if(count($updatedList)>0){
+                    foreach ($updatedList as $updatedId) {
 
-                    $specialFees = Events_specialzations_fees::where('specialize_id', '=', $updatedId)->first();
-                    if ($updatedId == (int) $specialzationsList[$index]['specialize_id']) {
-                        $specialFees->fees = $specialzationsList[$index]['fees'];
+                        $specialFees = Events_specialzations_fees::where('specialize_id', '=', $updatedId)->first();
+                        if ($updatedId == (int) $specialzationsList[$index]['specialize_id']) {
+                            $specialFees->fees = $specialzationsList[$index]['fees'];
 
-                        $specialFees->update();
+                            $specialFees->update();
+                        }
+
                     }
 
-                }
+
 
             }
+
+            //update days
+
+            $daysList = $request->kt_docs_repeater_basic;
+             $updatedDaysList = Event_days::where('event_id', $event->id)->get();
+            \Log::info(["message",$daysList]);
+
+            foreach ($updatedDaysList as $index => $update) {
+
+                foreach ($daysList as $index => $opt) {
+                if(( $update->event_date_from != $daysList[$index]['event_date_from']) && ( $update->event_date_to !=$daysList[$index]['event_date_to']  ) ){
+                    $update->delete();
+
+                }
+        }
+
+    }
+            if($daysList){
+                foreach ($daysList as $index => $opt) {
+
+                    $evDay = Event_days::firstOrNew([
+                        'event_date_from' => $daysList[$index]['event_date_from'],
+                        'event_date_to' => $daysList[$index]['event_date_to'],
+                        'event_id' => $event->id,
+
+                    ]);
+
+
+                        $evDay->event_date_from = $daysList[$index]['event_date_from'];
+                        $evDay->event_date_to = $daysList[$index]['event_date_to'];
+                        $evDay->event_id = $event->id;
+
+                        $evDay->save();
+
+
+
+
+
+                }
+            }
+
+
+
 
             DB::commit();
             //Enable foreign key checks!

@@ -110,42 +110,8 @@
 
                             </div>
                             <!--end::Input-->
-                            <!--begin::date picker-->
-                            <div class="d-flex flex-wrap gap-5">
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label for="" class="form-label">Date From</label>
-                                    <input class="form-control" name="event_date_form" placeholder="Pick from date"
-                                        id="kt_datepicker_1" />
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label for="" class="form-label">Date To</label>
-                                    <input class="form-control" name="event_date_to" placeholder="Pick end date"
-                                        id="kt_datepicker_2" />
-                                </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--end:date picker-->
-                            <!--begin::time picker-->
-                            <div class="d-flex flex-wrap gap-5">
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label for="" class="form-label">Time From</label>
-                                    <input class="form-control" name="event_time_form" placeholder="Pick from time"
-                                        id="kt_datepicker_7" />
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label for="" class="form-label">Time To</label>
-                                    <input class="form-control" name="event_time_to" placeholder="Pick to time"
-                                        id="kt_datepicker_8" />
-                                </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--end:time picker-->
+
+
 
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">

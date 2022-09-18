@@ -96,6 +96,12 @@
                         </li>
                         <!--end:::Tab item-->
 
+                         <!--begin:::Tab item-->
+                         <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                                href="#kt_ecommerce_add_days_advanced">Days</a>
+                        </li>
+                        <!--end:::Tab item-->
                     </ul>
                     <!--end:::Tabs-->
                     <!--begin::Tab content-->
@@ -126,44 +132,8 @@
 
                                         </div>
                                         <!--end::Input-->
-                                        <!--begin::date picker-->
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label for="" class="form-label">Date From</label>
-                                                <input class="form-control" name="event_date_form"
-                                                    placeholder="Pick from date" value="{{ $event->event_date_form }}"
-                                                    id="kt_datepicker_1" />
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label for="" class="form-label">Date To</label>
-                                                <input class="form-control" value="{{ $event->event_date_to }}"
-                                                    name="event_date_to" placeholder="Pick end date" id="kt_datepicker_2" />
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--end:date picker-->
-                                        <!--begin::time picker-->
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label for="" class="form-label">Time From</label>
-                                                <input class="form-control" value="{{ $event->event_time_form }}"
-                                                    name="event_time_form" placeholder="Pick from time"
-                                                    id="kt_datepicker_7" />
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label for="" class="form-label">Time To</label>
-                                                <input class="form-control" value="{{ $event->event_time_to }}"
-                                                    name="event_time_to" placeholder="Pick to time" id="kt_datepicker_8" />
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--end:time picker-->
+
+
 
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-7">
@@ -380,6 +350,7 @@
                                                 <div class="form-group">
                                                     <div data-repeater-list="kt_ecommerce_add_product_options"
                                                         class="d-flex flex-column gap-3">
+                                                        @if ($eventSpecialzation->count()>0)
                                                         @foreach ($eventSpecialzation as $index=>$specialList)
                                                         <div data-repeater-item=""
                                                             class="form-group d-flex flex-wrap gap-5">
@@ -422,6 +393,51 @@
                                                             </button>
                                                         </div>
                                                         @endforeach
+                                                        @else
+
+                                                        <div data-repeater-item=""
+                                                            class="form-group d-flex flex-wrap gap-5">
+                                                            <!--begin::Select2-->
+                                                            <div class="w-100 w-md-200px">
+                                                                <select class="form-select" name="specialize_id"
+                                                                    data-placeholder="Select a variation"
+                                                                    data-kt-ecommerce-catalog-add-product="product_option">
+                                                                    <option></option>
+                                                                    @foreach ($specialzations as $specialzation)
+                                                                    <option value="{{$specialzation->id}}"  >{{$specialzation->specialize_name}}</option>
+                                                                    @endforeach
+
+                                                                </select>
+                                                            </div>
+                                                            <!--end::Select2-->
+                                                            <!--begin::Input-->
+                                                            <input type="text" class="form-control mw-100 w-200px"
+                                                                name="fees" value="" placeholder="Fees" />
+                                                            <!--end::Input-->
+                                                            <button type="button" data-repeater-delete=""
+                                                                class="btn btn-sm btn-icon btn-light-danger">
+                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
+                                                                <span class="svg-icon svg-icon-2">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24"
+                                                                        fill="none">
+                                                                        <rect opacity="0.5" x="7.05025"
+                                                                            y="15.5356" width="12" height="2"
+                                                                            rx="1"
+                                                                            transform="rotate(-45 7.05025 15.5356)"
+                                                                            fill="black" />
+                                                                        <rect x="8.46447" y="7.05029"
+                                                                            width="12" height="2" rx="1"
+                                                                            transform="rotate(45 8.46447 7.05029)"
+                                                                            fill="black" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!--end::Svg Icon-->
+                                                            </button>
+                                                        </div>
+
+                                                        @endif
+
                                                     </div>
                                                 </div>
 
@@ -458,6 +474,121 @@
                         </div>
                         <!--end::Tab pane-->
 
+
+
+
+
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
+                            <div class="d-flex flex-column gap-7 gap-lg-10">
+
+                                <!--begin::Variations-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Days</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="" >
+                                            <!--begin::Label-->
+                                            <label class="form-label">Add Day</label>
+                                            <!--end::Label-->
+
+
+                                            <!--begin::Repeater-->
+                                            <div id="kt_docs_repeater_basic">
+
+
+                                                <!--begin::Form group-->
+                                                <div class="form-group">
+                                                    <div data-repeater-list="kt_docs_repeater_basic"
+                                                        class="d-flex flex-column gap-3">
+                                                        @if ($eventDays->count()>0)
+                                                        @foreach ($eventDays as $index=>$eventDay)
+                                                        <div data-repeater-item>
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Date From:</label>
+                                                                    <input  class="form-control  form-control-solid dPick"   name="event_date_from" value="{{$eventDay->event_date_from}}" placeholder="Pick date & time" id="kt_datepicker_3"/>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label  class="form-label">Date To:</label>
+                                                                    <input  class="form-control form-control-solid dPick"  name="event_date_to" value="{{$eventDay->event_date_to}}" placeholder="Pick date & time" id="kt_datepicker_4"/>
+                                                                </div>
+
+                                                                <div class="col-md-4">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                        <i class="la la-trash-o"></i>Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                        @else
+                                                        <div data-repeater-item>
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Date From:</label>
+                                                                    <input class="form-control form-control-solid dPick" placeholder="Pick date & time" id="kt_datepicker_3"/>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Date To:</label>
+                                                                    <input class="form-control form-control-solid dPick" placeholder="Pick date & time" id="kt_datepicker_4"/>
+                                                                </div>
+
+                                                                <div class="col-md-4">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                        <i class="la la-trash-o"></i>Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+
+                                                <!--end::Form group-->
+                                                <!--begin::Form group-->
+                                                <div class="form-group mt-5">
+                                                    <button type="button" data-repeater-create=""
+                                                        class="btn btn-sm btn-light-primary">
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
+                                                        <span class="svg-icon svg-icon-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.5" x="11" y="18"
+                                                                    width="12" height="2" rx="1"
+                                                                    transform="rotate(-90 11 18)" fill="black" />
+                                                                <rect x="6" y="11" width="12"
+                                                                    height="2" rx="1" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->Add another Day
+                                                    </button>
+                                                </div>
+                                                <!--end::Form group-->
+                                            </div>
+                                            <!--end::Repeater-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::Variations-->
+
+                            </div>
+                        </div>
+                        <!--end::Tab pane-->
+
+
+
+
                     </div>
                     <!--end::Tab content-->
                     <div class="d-flex justify-content-end">
@@ -483,18 +614,9 @@
 @endsection
 @section('scripts')
     <script>
-        $("#kt_datepicker_1").flatpickr();
-        $("#kt_datepicker_2").flatpickr();
-        $("#kt_datepicker_8").flatpickr({
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-        });
-
-        $("#kt_datepicker_7").flatpickr({
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-        });
+    $(".dPick").flatpickr({
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+});
     </script>
 @endsection

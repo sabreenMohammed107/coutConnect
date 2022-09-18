@@ -76,7 +76,7 @@ var KTAppEcommerceSaveProduct = function() {
     const initFormRepeater = () => {
 
         $('#kt_ecommerce_add_product_options').repeater({
-            // initEmpty: false,
+            initEmpty: false,
 
             defaultValues: {
                 'text-input': 'foo'
@@ -99,7 +99,39 @@ var KTAppEcommerceSaveProduct = function() {
 
     }
 
-    // Init condition select2
+    const initFormRepeaterDays = () => {
+
+            $('#kt_docs_repeater_basic').repeater({
+                initEmpty: false,
+
+                defaultValues: {
+                    'text-input': 'foo'
+                },
+
+                show: function() {
+                    $(this).slideDown();
+
+                    // Init select2 on new repeated items
+                    // initConditionsSelect2();
+                    $(".dPick").flatpickr({
+                        enableTime: true,
+                        dateFormat: "Y-m-d H:i",
+
+                    });
+
+
+                    console.log('show');
+                },
+
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                    console.log('hide');
+                    console.log(deleteElement);
+                }
+            });
+
+        }
+        // Init condition select2
     const initConditionsSelect2 = () => {
         // Tnit new repeating condition types
         const allConditionTypes = document.querySelectorAll('[data-kt-ecommerce-catalog-add-product="product_option"]');
@@ -249,22 +281,22 @@ var KTAppEcommerceSaveProduct = function() {
         });
 
 
-        // Handle datepicker
-        const datepicker = document.getElementById('kt_ecommerce_add_product_status_datepicker');
+        // // Handle datepicker
+        // const datepicker = document.getElementById('kt_ecommerce_add_product_status_datepicker');
 
-        // Init flatpickr --- more info: https://flatpickr.js.org/
-        $('#kt_ecommerce_add_product_status_datepicker').flatpickr({
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-        });
+        // // Init flatpickr --- more info: https://flatpickr.js.org/
+        // $('#kt_ecommerce_add_product_status_datepicker').flatpickr({
+        //     enableTime: true,
+        //     dateFormat: "Y-m-d H:i",
+        // });
 
-        const showDatepicker = () => {
-            datepicker.parentNode.classList.remove('d-none');
-        }
+        // const showDatepicker = () => {
+        //     datepicker.parentNode.classList.remove('d-none');
+        // }
 
-        const hideDatepicker = () => {
-            datepicker.parentNode.classList.add('d-none');
-        }
+        // const hideDatepicker = () => {
+        //     datepicker.parentNode.classList.add('d-none');
+        // }
     }
 
     // Condition type handler
@@ -410,6 +442,7 @@ var KTAppEcommerceSaveProduct = function() {
             // initSlider();
             initFormRepeater();
             // initDropzone();
+            initFormRepeaterDays();
             initConditionsSelect2();
 
             // Handle forms

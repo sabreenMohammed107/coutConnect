@@ -16,17 +16,20 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name', 250)->nullable();
-            $table->date('event_date_form')->nullable();
-            $table->date('event_date_to')->nullable();
 
-            $table->time('event_time_form', $precision = 0)->nullable();
-            $table->time('event_time_to', $precision = 0)->nullable();
             $table->unsignedBigInteger('organizer_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->float('event_fees', 10, 2)->nullable();
             $table->enum('featured', [0,1])->default(0);
             $table->enum('premium', [0,1])->default(0);
             $table->longText('event_overview')->nullable();
+            $table->string('email', 250)->nullable();
+            $table->string('ranking', 250)->nullable();
+            $table->unsignedBigInteger('language_id')->nullable();
+            $table->string('area', 250)->nullable();
+            $table->longText('details_address')->nullable();
+            $table->longText('google_map')->nullable();
+            $table->unsignedBigInteger('event_status_id')->nullable();
             $table->timestamps();
         });
     }

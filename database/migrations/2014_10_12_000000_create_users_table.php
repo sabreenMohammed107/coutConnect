@@ -17,11 +17,13 @@ return new class extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email', 191)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('type')->default(0)->comment('Users: 0=>User, 1=>Admin, 2=>Manager');
-            /* Users: 0=>User, 1=>Admin, 2=>Manager */
+            $table->tinyInteger('type')->default(0)->comment('Users: 0=>User, 1=>Admin, 2=>Organizer');
+            /* Users: 0=>User, 1=>Admin, 2=>Organizer */
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->unsignedBigInteger('organizer_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
