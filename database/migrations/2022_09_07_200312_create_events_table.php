@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('organizer_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->float('event_fees', 10, 2)->nullable();
+            // $table->float('event_fees', 10, 2)->nullable();
             $table->enum('featured', [0,1])->default(0);
             $table->enum('premium', [0,1])->default(0);
             $table->longText('event_overview')->nullable();
@@ -30,6 +30,8 @@ return new class extends Migration
             $table->longText('details_address')->nullable();
             $table->longText('google_map')->nullable();
             $table->unsignedBigInteger('event_status_id')->nullable();
+            $table->unsignedBigInteger('event_type_id')->nullable();
+            $table->text('cover_photo')->nullable();
             $table->timestamps();
         });
     }

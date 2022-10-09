@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'user-access:admin'], 'prefix' => 'dashbo
        //medicine-fields
     Route::resource('medicine-fields', MedicineFieldController::class);
        //categories
-    Route::resource('categories', CategoryController::class);
+    // Route::resource('categories', CategoryController::class);
       //specializations
     Route::resource('specializations', SpecialzationController::class);
       //countries
@@ -97,6 +97,8 @@ Route::group(['middleware' => ['auth', 'user-access:admin'], 'prefix' => 'dashbo
  Route::resource('events', EventController::class);
   //doctors
   Route::resource('doctors', DoctorController::class);
+  //activeDoctor
+  Route::post('/activeDoctor',[DoctorController::class, 'activeDoctor'])->name('activeDoctor');
 // //how-register
 //     Route::resource('/how-register', HowRegisterController::class);
 // //faq

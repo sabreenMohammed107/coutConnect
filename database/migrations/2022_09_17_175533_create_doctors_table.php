@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name', 250)->nullable();
             $table->string('email', 250)->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
-            $table->string('phone', 250)->nullable();
+
             $table->string('healthcare_file', 250)->nullable();
             $table->string('licence_file', 250)->nullable();
             $table->enum('verified', [0,1])->default(0);
+            $table->unsignedBigInteger('register_type_id')->nullable();
             $table->timestamps();
         });
     }

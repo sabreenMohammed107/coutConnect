@@ -84,13 +84,17 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">Event</th>
+                                <th class="min-w-200px">Title</th>
                                 {{-- <th class="text-end min-w-100px">Date</th> --}}
                                 {{-- <th class="text-end min-w-100px">Time</th> --}}
-                                <th class="text-end min-w-70px">Fees</th>
-                                <th class="text-end min-w-100px">City</th>
+                                <th class="text-end min-w-70px">Status</th>
+                                <th class="text-end min-w-100px">Email</th>
 
-                                <th class="text-end min-w-100px">premium</th>
+                                <th class="text-end min-w-100px">Creation Date</th>
+                                <th class="text-end min-w-100px">Last Update</th>
+                                <th class="text-end min-w-100px">Ranking</th>
+                                <th class="text-end min-w-100px">Organized By</th>
+                                <th class="text-end min-w-100px">Views</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -127,42 +131,41 @@
                 </div>
             </div>
         </td>
-        <!--end::Category=-->
-         <!--begin::SKU=-->
-         {{-- <td class="text-end pe-0">
 
-            <span class="fw-bolder">{{ $row->event_date_form }}</span>
-        </td> --}}
-        <!--end::SKU=-->
-        <!--begin::SKU=-->
-        {{-- <td class="text-end pe-0">
-            <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->event_time_form }}</span>
-        </td> --}}
-        <!--end::SKU=-->
-        <!--begin::Qty=-->
         <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->event_fees }}</span>
+            <span class="fw-bolder ms-3">{{ $row->status->status ?? '' }}</span>
         </td>
         <!--end::Qty=-->
         <!--begin::Price=-->
         <td class="text-end pe-0">
-            <span class="fw-bolder text-dark">{{ $row->city->name ?? '' }}</span>
+            <span class="fw-bolder text-dark">{{ $row->email?? '' }}</span>
         </td>
         <!--end::Price=-->
+ <!--begin::Price=-->
+ <td class="text-end pe-0">
+    <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->created_at))}}</span>
+</td>
+<!--end::Price=-->
 
-        <!--begin::Status=-->
-        <td class="text-end pe-0" data-order="Inactive">
-            <!--begin::Badges-->
-            @if($row->premium == 1)
-            <div class="badge badge-light-success">Premium</div>
-            @else
-            <div class="badge badge-light-danger">Not Premium</div>
-            @endif
-
-            <!--end::Badges-->
-        </td>
-        <!--end::Status=-->
+ <!--begin::Price=-->
+ <td class="text-end pe-0">
+    <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->updated_at))}}</span>
+</td>
+<!--begin::Price=-->
+<td class="text-end pe-0">
+    <span class="fw-bolder text-dark">{{ $row->ranking?? '' }}</span>
+</td>
+<!--end::Price=-->
+<!--end::Price=-->
+<td class="text-end pe-0" data-order="15">
+    <span class="fw-bolder ms-3">{{ $row->organizer->name ?? '' }}</span>
+</td>
+<!--end::Qty=-->
+<!--end::Price=-->
+<td class="text-end pe-0" data-order="15">
+    <span class="fw-bolder ms-3">view 0</span>
+</td>
+<!--end::Qty=-->
         <!--begin::Action=-->
         <td class="text-end">
             <a href="#" class="btn btn-sm btn-light btn-active-light-primary"

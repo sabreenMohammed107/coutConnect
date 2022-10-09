@@ -42,7 +42,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2> Edit Thumbnail</h2>
+                                <h2> Edit Cover Photo</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
@@ -51,9 +51,9 @@
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
                             <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
-                                style="background-image: url('{{ asset('uploads/events') }}/{{ $event->img }}')">
+                                style="background-image: url('{{ asset('uploads/events') }}/{{ $event->cover_photo }}')">
                                 <div class="image-input-wrapper w-150px h-150px"
-                                    style="background-image: url(' {{ asset('uploads/events') }}/{{ $event->img }}')">
+                                    style="background-image: url(' {{ asset('uploads/events') }}/{{ $event->cover_photo }}')">
 
                                 </div>
                                 <!--end::Preview existing avatar-->
@@ -62,7 +62,7 @@
                                     data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" name="img" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="cover_photo" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -214,30 +214,7 @@
                                         </div>
                                         <!--end::Input group-->
 
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-bold form-label mt-3">
-                                                <span class="required">Add Categories</span>
-                                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                                    title="Interviewer who conducts the meeting with the interviewee"></i>
-                                            </label>
-                                            <!--end::Label-->
-                                            <select class="form-select form-select-solid" name="categories[]"
-                                                data-control="select2" data-placeholder="Select an option"
-                                                data-allow-clear="true" multiple="multiple">
-                                                <option></option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}"
-                                                        @foreach ($eventcategories as $sublist) {{ $sublist->pivot->category_id == $category->id ? 'selected' : '' }} @endforeach>
-                                                        {{ $category->category_enname }}
-                                                    </option>
-                                                @endforeach
 
-
-                                            </select>
-                                        </div>
-                                        <!--end::Input group-->
 
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-7">
@@ -367,10 +344,7 @@
                                                                 </select>
                                                             </div>
                                                             <!--end::Select2-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control mw-100 w-200px"
-                                                                name="fees" value="{{$specialList->fees}}" placeholder="Fees" />
-                                                            <!--end::Input-->
+
                                                             <button type="button" data-repeater-delete=""
                                                                 class="btn btn-sm btn-icon btn-light-danger">
                                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
@@ -410,10 +384,7 @@
                                                                 </select>
                                                             </div>
                                                             <!--end::Select2-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control mw-100 w-200px"
-                                                                name="fees" value="" placeholder="Fees" />
-                                                            <!--end::Input-->
+
                                                             <button type="button" data-repeater-delete=""
                                                                 class="btn btn-sm btn-icon btn-light-danger">
                                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
@@ -512,15 +483,22 @@
                                                         @foreach ($eventDays as $index=>$eventDay)
                                                         <div data-repeater-item>
                                                             <div class="form-group row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label class="form-label">Date From:</label>
-                                                                    <input  class="form-control  form-control-solid dPick"   name="event_date_from" value="{{$eventDay->event_date_from}}" placeholder="Pick date & time" id="kt_datepicker_3"/>
+                                                                    <input  class="form-control  form-control-solid dPick"   name="event_date_from" value="{{$eventDay->event_date_from}}" placeholder="Pick date" id="kt_datepicker_3"/>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
+                                                                    <label class="form-label">Time From:</label>
+                                                                    <input  class="form-control  form-control-solid tPick"   name="event_time_from" value="{{$eventDay->event_time_from}}" placeholder="Pick date" id="kt_datepicker_3"/>
+                                                                </div>
+                                                                <div class="col-md-3">
                                                                     <label  class="form-label">Date To:</label>
-                                                                    <input  class="form-control form-control-solid dPick"  name="event_date_to" value="{{$eventDay->event_date_to}}" placeholder="Pick date & time" id="kt_datepicker_4"/>
+                                                                    <input  class="form-control form-control-solid dPick"  name="event_date_to" value="{{$eventDay->event_date_to}}" placeholder="Pick date" id="kt_datepicker_4"/>
                                                                 </div>
-
+                                                                <div class="col-md-3">
+                                                                    <label class="form-label">Time To:</label>
+                                                                    <input  class="form-control  form-control-solid tPick"   name="event_time_to" value="{{$eventDay->event_time_to}}" placeholder="Pick date" id="kt_datepicker_3"/>
+                                                                </div>
                                                                 <div class="col-md-4">
                                                                     <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
                                                                         <i class="la la-trash-o"></i>Delete
@@ -532,15 +510,22 @@
                                                         @else
                                                         <div data-repeater-item>
                                                             <div class="form-group row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label class="form-label">Date From:</label>
-                                                                    <input class="form-control form-control-solid dPick" name="event_date_from" placeholder="Pick date & time" id="kt_datepicker_3"/>
+                                                                    <input  class="form-control  form-control-solid dPick"   name="event_date_from"  placeholder="Pick date" id="kt_datepicker_3"/>
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="form-label">Date To:</label>
-                                                                    <input class="form-control form-control-solid dPick" name="event_date_to" placeholder="Pick date & time" id="kt_datepicker_4"/>
+                                                                <div class="col-md-3">
+                                                                    <label class="form-label">Time From:</label>
+                                                                    <input  class="form-control  form-control-solid tPick"   name="event_time_from"  placeholder="Pick date" id="kt_datepicker_3"/>
                                                                 </div>
-
+                                                                <div class="col-md-3">
+                                                                    <label  class="form-label">Date To:</label>
+                                                                    <input  class="form-control form-control-solid dPick"  name="event_date_to"  placeholder="Pick date" id="kt_datepicker_4"/>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="form-label">Time To:</label>
+                                                                    <input  class="form-control  form-control-solid tPick"   name="event_time_to"  placeholder="Pick date" id="kt_datepicker_3"/>
+                                                                </div>
                                                                 <div class="col-md-4">
                                                                     <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
                                                                         <i class="la la-trash-o"></i>Delete
@@ -614,9 +599,11 @@
 @endsection
 @section('scripts')
     <script>
-    $(".dPick").flatpickr({
+    $(".dPick").flatpickr();
+    $(".tPick").flatpickr({
     enableTime: true,
-    dateFormat: "Y-m-d H:i",
+    noCalendar: true,
+    dateFormat: "H:i",
 });
     </script>
 @endsection

@@ -40,6 +40,7 @@
      <script src="{{asset('dist/assets/js/custom/utilities/modals/create-project/main.js')}}"></script>
      <script src="{{asset('dist/assets/js/custom/utilities/modals/users-search.js')}}"></script>
      <script src="{{asset('dist/assets/js/custom/utilities/modals/new-target.js')}}"></script>
+     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
 @yield('scripts')
      <!--end::Page Custom Javascript-->
      <!--end::Javascript-->

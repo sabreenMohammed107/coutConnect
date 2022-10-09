@@ -52,7 +52,10 @@
                             <!--end::Svg Icon-->
                             <input type="text" data-kt-ecommerce-category-filter="search"
                                 class="form-control form-control-solid w-250px ps-14" placeholder="Search Field" />
-                        </div>
+
+                                <div class=" col-md-2 text-left "> <button class="btn" id="exporttable" ><i class="fas fa-file-export"></i></button> </div>
+
+                            </div>
                         <!--end::Search-->
                     </div>
                     <!--end::Card title-->
@@ -71,7 +74,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
-                       <!--begin::Table-->
+                      <!--begin::Table-->
                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
                         <!--begin::Table head-->
                         <thead>
@@ -84,11 +87,12 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">Doctor</th>
-                                <th class="text-end min-w-100px">phone</th>
-                                <th class="text-end min-w-70px">email</th>
+                                <th class="min-w-200px">Name</th>
+                                <th class="text-end min-w-100px">email</th>
+                                <th class="text-end min-w-70px">register type</th>
+                                <th class="text-end min-w-70px">joined at</th>
 
-                                <th class="text-end min-w-70px">Actions</th>
+                                <th class="text-end min-w-70px hide-data">Actions</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -128,59 +132,144 @@
         <!--begin::SKU=-->
         <td class="text-end pe-0">
             <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->phone }}</span>
+            <span class="fw-bolder">{{ $row->user->email ??  ''}}</span>
         </td>
         <!--end::SKU=-->
         <!--begin::Qty=-->
         <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->user->email ?? 0 }}</span>
+            <span class="fw-bolder ms-3">{{ $row->register_type_id  }}</span>
         </td>
         <!--end::Qty=-->
-
-        <!--begin::Action=-->
-        <td class="text-end">
-            <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                <span class="svg-icon svg-icon-5 m-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                            fill="black" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-            </a>
-            <!--begin::Menu-->
-            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                data-kt-menu="true">
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                    <a href="{{ route('doctors.show', $row->id) }}"
-                        class="menu-link px-3">Show</a>
-                </div>
-                <!--end::Menu item-->
-                 <!--begin::Menu item-->
-                 <div class="menu-item px-3">
-                    {{-- <a href="#" class="menu-link px-3"
-                        data-kt-ecommerce-category-filter="delete_row">Delete</a> --}}
-
+          <!--begin::Qty=-->
+          <td class="text-end pe-0" data-order="15">
+            <span class="fw-bolder ms-3">{{date('d-m-Y', strtotime($row->created_at))}}</span>
+        </td>
+        <!--end::Qty=-->
+													<!--begin::Action=-->
+													<td class="text-end">
+														<!--begin::Update-->
+														<button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission_{{$row->id}}">
+															<!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+															<span class="svg-icon svg-icon-3">
+                                                                <i class="fas fa-check-circle text-success"></i>
+																{{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+																	<path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+																</svg> --}}
+															</span>
+															<!--end::Svg Icon-->
+														</button>
+														<!--end::Update-->
+														<!--begin::Delete-->
+														<a class="btn btn-icon btn-active-light-primary w-30px h-30px" href="#"
+                                                        data-kt-ecommerce-category-filter="delete_row">
+															<!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+															<span class="svg-icon svg-icon-3">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
+																	<path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
+																	<path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
+																</svg>
+															</span>
+															<!--end::Svg Icon-->
 
         <form id="delete_{{$row->id}}" action="{{ route('doctors.destroy', $row->id) }}"  method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
+            @csrf
+            @method('DELETE')
 
-        <button type="submit" value=""></button>
-        </form>
+            <button type="submit" value=""></button>
+            </form>
+        </a>
+														<!--end::Delete-->
+													</td>
+													<!--end::Action=-->
+<!--begin::Modal - Update permissions-->
+<div class="modal fade" id="kt_modal_update_permission_{{$row->id}}" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Update User </h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-permissions-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
                 </div>
-                <!--end::Menu item-->
+                <!--end::Close-->
             </div>
-            <!--end::Menu-->
-        </td>
-        <!--end::Action=-->
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Notice-->
+                <!--begin::Notice-->
+                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
+                    <!--begin::Icon-->
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+                    <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
+                            <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
+                            <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <!--end::Icon-->
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-stack flex-grow-1">
+                        <!--begin::Content-->
+                        <div class="fw-bold">
+                            <div class="fs-6 text-gray-700">
+                            <strong class="me-1">Warning!</strong>By Activate {{$row->name}}, you will give him permission to make business page . Please ensure you're absolutely certain before proceeding.</div>
+                        </div>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Notice-->
+                <!--end::Notice-->
+                <!--begin::Form-->
+                <form id="kt_modal_update_permission_form" method="post" class="form" action="#">
+                   @csrf
+                   <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                      <input type="hidden" name="doctor_id" value="{{$row->id}}">
+
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-permissions-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - Update permissions-->
+<!--end::Modals-->
     </tr>
     <!--end::Table row-->
+
 @endforeach
 
 
@@ -196,4 +285,31 @@
         <!--end::Container-->
     </div>
     <!--end::Post-->
+
 @endsection
+@section('scripts')
+<script>$(function() {
+    $("#exporttable").click(function(e){
+      var table = $("#kt_ecommerce_category_table");
+      if(table && table.length){
+        table.find('.hide-data').remove(); //removing rows while exporting
+        $(table).table2excel({
+          exclude: ".noExl",
+          name: "Excel Document Name",
+          filename: "Doctors" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+          fileext: ".xls",
+          exclude_img: true,
+          exclude_links: true,
+          exclude_inputs: true,
+          preserveColors: false,
+
+          columns:[],
+
+        });
+      }
+
+    });
+
+  });</script>
+
+  @endsection

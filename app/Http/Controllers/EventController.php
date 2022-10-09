@@ -9,6 +9,10 @@ use App\Models\City;
 use App\Models\Event;
 use App\Models\Events_specialzations_fees;
 use App\Models\Event_days;
+use App\Models\Event_status;
+use App\Models\Event_type;
+use App\Models\Events_specialzations;
+use App\Models\Language;
 use App\Models\Medicine_field;
 use App\Models\Organizer;
 use App\Models\Specialzation;
@@ -58,9 +62,11 @@ class EventController extends Controller
         $cities = City::all();
         $organizers = Organizer::all();
         $medicines = Medicine_field::all();
-        $categories = Category::all();
+        $eventTypes = Event_type::all();
+        $status=Event_status::all();
         $tags = Tag::all();
-        return view($this->viewName . 'add', compact(['cities', 'organizers', 'medicines', 'categories', 'tags']));
+        $languages=Language::all();
+        return view($this->viewName . 'add', compact(['cities', 'organizers', 'medicines', 'eventTypes', 'tags','status','languages']));
     }
 
     /**
@@ -76,11 +82,11 @@ class EventController extends Controller
             // Disable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-            $input = $request->except(['_token', 'img']);
-            if ($request->hasFile('img')) {
-                $attach_image = $request->file('img');
+            $input = $request->except(['_token', 'cover_photo']);
+            if ($request->hasFile('cover_photo')) {
+                $attach_image = $request->file('cover_photo');
 
-                $input['img'] = $this->UplaodImage($attach_image);
+                $input['cover_photo'] = $this->UplaodImage($attach_image);
             }
             if ($request->has('featured')) {
 
@@ -104,11 +110,7 @@ class EventController extends Controller
 
             }
 
-            if (!empty($request->get('categories'))) {
 
-                $event->categories()->attach($request->categories);
-
-            }
             if (!empty($request->get('tags'))) {
 
                 $event->tags()->attach($request->categories);
@@ -153,15 +155,15 @@ class EventController extends Controller
         $organizers = Organizer::all();
 
         $eventMedicines = $event->medicines->all();
-        $eventcategories = $event->categories->all();
+
         $eventTags = $event->tags->all();
-        $eventSpecialzation = Events_specialzations_fees::where('event_id', $event->id)->get();
+        $eventSpecialzation = Events_specialzations::where('event_id', $event->id)->get();
         $medicines = Medicine_field::all();
-        $categories = Category::all();
+
         $specialzations = Specialzation::all();
         $tags = Tag::all();
         $eventDays = Event_days::where('event_id', $event->id)->get();
-        return view($this->viewName . 'edit', compact(['event', 'cities', 'organizers', 'eventMedicines', 'eventcategories', 'eventSpecialzation', 'eventTags', 'medicines', 'categories', 'tags', 'specialzations', 'eventDays']));
+        return view($this->viewName . 'edit', compact(['event', 'cities', 'organizers', 'eventMedicines',  'eventSpecialzation', 'eventTags', 'medicines', 'tags', 'specialzations', 'eventDays']));
     }
 
     /**
@@ -202,7 +204,7 @@ class EventController extends Controller
 
             $event->medicines()->sync($request->medicines);
 
-            $event->categories()->sync($request->categories);
+
 
             $event->tags()->sync($request->tags);
             //kt_ecommerce_add_product_options
@@ -220,25 +222,8 @@ class EventController extends Controller
 
             $event->specialzations()->sync($spicialIds);
 
-// then
-            $updatedList = $event->specialzations()->pluck('specialize_id')->toArray(); // [1,2,3]
-            \Log::info($updatedList);
-            \Log::info($specialzationsList);
-            foreach ($specialzationsList as $index => $opt) {
-                // if(count($updatedList)>0){
-                foreach ($updatedList as $updatedId) {
 
-                    $specialFees = Events_specialzations_fees::where('specialize_id', '=', $updatedId)->where('event_id', '=', $event->id)->first();
-                    if ($updatedId == (int) $specialzationsList[$index]['specialize_id']) {
-                        $specialFees->fees = $specialzationsList[$index]['fees'];
 
-                        $specialFees->update();
-
-                    }
-
-                }
-
-            }
 
             //update days
 
@@ -249,7 +234,8 @@ class EventController extends Controller
                 foreach ($updatedDaysList as $index => $update) {
 
                     foreach ($daysList as $index => $opt) {
-                        if (($update->event_date_from != $daysList[$index]['event_date_from']) && ($update->event_date_to != $daysList[$index]['event_date_to'])) {
+                        if (($update->event_date_from != $daysList[$index]['event_date_from']) && ($update->event_date_to != $daysList[$index]['event_date_to'])
+                        && ($update->event_time_from != $daysList[$index]['event_time_from']) && ($update->event_time_to != $daysList[$index]['event_time_to'])) {
                             $update->delete();
 
                         }
@@ -264,12 +250,16 @@ class EventController extends Controller
                     $evDay = Event_days::firstOrNew([
                         'event_date_from' => $daysList[$index]['event_date_from'],
                         'event_date_to' => $daysList[$index]['event_date_to'],
+                        'event_time_from' => $daysList[$index]['event_time_from'],
+                        'event_time_to' => $daysList[$index]['event_time_to'],
                         'event_id' => $event->id,
 
                     ]);
 
                     $evDay->event_date_from = $daysList[$index]['event_date_from'];
                     $evDay->event_date_to = $daysList[$index]['event_date_to'];
+                    $evDay->event_time_from = $daysList[$index]['event_time_from'];
+                    $evDay->event_time_to = $daysList[$index]['event_time_to'];
                     $evDay->event_id = $event->id;
 
                     $evDay->save();

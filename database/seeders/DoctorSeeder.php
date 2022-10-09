@@ -20,20 +20,20 @@ class DoctorSeeder extends Seeder
                 'name'=>'Admin User1',
 
 
-                'phone'=>'012004751456',
+
 
             ],
             [
                 'name'=>'Admin User2',
 
 
-                'phone'=>'012004751456',
+
             ],
             [
                 'name'=>'Admin User3',
 
 
-                'phone'=>'012004751456',
+
             ],
         ];
 

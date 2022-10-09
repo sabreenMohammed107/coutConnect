@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('specialzations', function (Blueprint $table) {
             $table->id();
             $table->string('specialize_name', 250)->nullable();
+            $table->unsignedBigInteger('medicine_field_id')->nullable();
             $table->timestamps();
         });
     }

@@ -6,14 +6,14 @@
             <!--begin::Info-->
             <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
                 <!--begin::Title-->
-                <h1 class="text-dark fw-bolder my-1 fs-2">Organizers</h1>
+                <h1 class="text-dark fw-bolder my-1 fs-2">Business Page</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb fw-bold fs-base my-1">
                     <li class="breadcrumb-item text-muted">
                         <a href="../dist/index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
-                    <li class="breadcrumb-item text-muted">Organizers</li>
+                    <li class="breadcrumb-item text-muted">Business Page</li>
 
                     <li class="breadcrumb-item text-dark">All</li>
                 </ul>
@@ -60,7 +60,7 @@
                     <div class="card-toolbar">
                         <!--begin::Add customer-->
                       	<!--begin::Add product-->
-											<a href="{{ route('organizers.create') }}" class="btn btn-primary">Add Organizer</a>
+											<a href="{{ route('organizers.create') }}" class="btn btn-primary">Create Business Page</a>
 											<!--end::Add product-->
 
                         <!--end::Add customer-->
@@ -84,12 +84,13 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">Organizer</th>
-                                <th class="text-end min-w-100px">phone</th>
-                                <th class="text-end min-w-70px">email</th>
-                                <th class="text-end min-w-100px">website</th>
+                                <th class="min-w-200px">Name</th>
+                                <th class="text-end min-w-100px">status</th>
+                                <th class="text-end min-w-70px">Email</th>
+                                <th class="text-end min-w-100px">Creation Date</th>
 
-                                <th class="text-end min-w-100px">fb_account</th>
+                                <th class="text-end min-w-100px">Last Update</th>
+                                <th class="text-end min-w-100px">License</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -130,7 +131,7 @@
         <!--begin::SKU=-->
         <td class="text-end pe-0">
             <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->phone }}</span>
+            <span class="fw-bolder">{{ $row->status->status ?? '' }}</span>
         </td>
         <!--end::SKU=-->
         <!--begin::Qty=-->
@@ -140,14 +141,20 @@
         <!--end::Qty=-->
         <!--begin::Price=-->
         <td class="text-end pe-0">
-            <span class="fw-bolder text-dark">{{ $row->website }}</span>
+            <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->created_at))}}</span>
+        </td>
+        <!--end::Price=-->
+
+         <!--begin::Price=-->
+         <td class="text-end pe-0">
+            <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->updated_at))}}</span>
         </td>
         <!--end::Price=-->
 
         <!--begin::Status=-->
         <td class="text-end pe-0" data-order="Inactive">
             <!--begin::Badges-->
-            <div class="badge badge-light-danger">{{ $row->fb_account }}</div>
+            <div class="badge badge-light-danger">{{ $row->licence_file }}</div>
             <!--end::Badges-->
         </td>
         <!--end::Status=-->

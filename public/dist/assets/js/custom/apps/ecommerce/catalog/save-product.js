@@ -113,10 +113,11 @@ var KTAppEcommerceSaveProduct = function() {
 
                     // Init select2 on new repeated items
                     // initConditionsSelect2();
-                    $(".dPick").flatpickr({
+                    $(".dPick").flatpickr();
+                    $(".tPick").flatpickr({
                         enableTime: true,
-                        dateFormat: "Y-m-d H:i",
-
+                        noCalendar: true,
+                        dateFormat: "H:i",
                     });
 
 

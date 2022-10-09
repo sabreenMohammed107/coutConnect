@@ -103,14 +103,14 @@
                                         <span class="menu-title">Medical Fields</span>
                                     </a>
                                 </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('categories.index') }}">
+                                {{-- <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('customers.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Events Types</span>
+                                        <span class="menu-title">Users</span>
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('specializations.index') }}">
                                         <span class="menu-bullet">

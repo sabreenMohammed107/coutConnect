@@ -102,4 +102,14 @@ class DoctorController extends Controller
     {
         //
     }
+    /**
+     *
+     *
+     *
+     *
+     */
+    public function activeDoctor(Request $request){
+        // activeDoctor
+
+    }
 }

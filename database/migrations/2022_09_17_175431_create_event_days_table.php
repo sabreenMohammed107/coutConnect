@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('event_days', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('event_date_from', $precision = 0)->nullable();
-            $table->dateTime('event_date_to', $precision = 0)->nullable();
+            $table->date('event_date_from')->nullable();
+            $table->date('event_date_to')->nullable();
+            $table->time('event_time_from', $precision = 0)->nullable();
+            $table->time('event_time_to', $precision = 0)->nullable();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->timestamps();
         });

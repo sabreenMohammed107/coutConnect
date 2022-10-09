@@ -184,87 +184,105 @@ var KTAppEcommerceSaveCategory = function() {
 
     // Submit form handler
     const handleSubmit = () => {
-        // Define variables
-        let validator;
+            // Define variables
+            let validator;
 
-        // Get elements
-        const form = document.getElementById('kt_ecommerce_add_category_form');
-        const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
+            // Get elements
+            const form = document.getElementById('kt_ecommerce_add_category_form');
+            const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
 
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(
-            form, {
-                fields: {
-                    'category_name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Category name is required'
+            // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+            validator = FormValidation.formValidation(
+                form, {
+                    fields: {
+                        'category_name': {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Category name is required'
+                                }
                             }
                         }
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        bootstrap: new FormValidation.plugins.Bootstrap5({
+                            rowSelector: '.fv-row',
+                            eleInvalidClass: '',
+                            eleValidClass: ''
+                        })
                     }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
                 }
-            }
-        );
+            );
 
-        // Handle submit button
-        submitButton.addEventListener('click', e => {
-            e.preventDefault();
+            // Handle submit button
+            submitButton.addEventListener('click', e => {
+                e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function(status) {
-                    console.log('validated!');
+                // Validate form before submit
+                if (validator) {
+                    validator.validate().then(function(status) {
+                        console.log('validated!');
 
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
+                        if (status == 'Valid') {
+                            submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
+                            // Disable submit button whilst loading
+                            submitButton.disabled = true;
 
-                        setTimeout(function() {
-                            submitButton.removeAttribute('data-kt-indicator');
+                            setTimeout(function() {
+                                submitButton.removeAttribute('data-kt-indicator');
 
+                                Swal.fire({
+                                    text: "Form has been successfully submitted!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function(result) {
+                                    if (result.isConfirmed) {
+                                        // Enable submit button after loading
+
+                                        submitButton.disabled = false;
+                                        form.submit();
+                                        // Redirect to customers list page
+                                        // window.location = form.getAttribute("data-kt-redirect");
+                                    }
+                                });
+                            }, 2000);
+                        } else {
                             Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
-                            }).then(function(result) {
-                                if (result.isConfirmed) {
-                                    // Enable submit button after loading
-
-                                    submitButton.disabled = false;
-                                    form.submit();
-                                    // Redirect to customers list page
-                                    // window.location = form.getAttribute("data-kt-redirect");
-                                }
                             });
-                        }, 2000);
-                    } else {
-                        Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
-                });
+                        }
+                    });
+                }
+            })
+        }
+        // Init DropzoneJS --- more info:
+    const initDropzone = () => {
+        var myDropzone = new Dropzone("#kt_ecommerce_add_product_media", {
+            url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 10,
+            maxFilesize: 10, // MB
+            addRemoveLinks: true,
+            accept: function(file, done) {
+                if (file.name == "wow.jpg") {
+                    done("Naha, you don't.");
+                } else {
+                    done();
+
+                }
             }
-        })
+        });
     }
 
     // Public methods
@@ -275,7 +293,7 @@ var KTAppEcommerceSaveCategory = function() {
             initTagify();
             initFormRepeater();
             initConditionsSelect2();
-
+            initDropzone();
             // Handle forms
             handleStatus();
             handleConditions();

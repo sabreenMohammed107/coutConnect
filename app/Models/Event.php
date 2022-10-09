@@ -9,21 +9,21 @@ class Event extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'img',
-    'name',
-    'organizer_id',
-    'city_id',
-    'event_fees',
-    'featured',
-    'premium',
-    'event_overview',
-    'email',
-    'ranking',
-    'language_id',
-    'area',
-    'details_address',
-    'google_map',
-    'event_status_id',
+        'name',
+        'organizer_id',
+        'city_id',
+        'featured',
+        'premium',
+        'event_overview',
+        'email',
+        'ranking',
+        'language_id',
+        'area',
+        'details_address',
+        'google_map',
+        'event_status_id',
+        'event_type_id',
+        'cover_photo',
 
     ];
 
@@ -46,10 +46,6 @@ class Event extends Model
         return $this->belongsToMany(Medicine_field::class, 'events_medicine_fields');
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'events_categories');
-    }
 
     public function tags()
     {
@@ -59,7 +55,7 @@ class Event extends Model
 
     public function specialzations()
     {
-        return $this->belongsToMany(Specialzation::class, 'events_specialzations_fees','event_id','specialize_id');
+        return $this->belongsToMany(Specialzation::class, 'events_specialzations','event_id','specialize_id');
     }
 
 
@@ -69,7 +65,7 @@ class Event extends Model
 
         static::deleting(function($event) { // before delete() method call this
              $event->medicines()->detach();
-             $event->categories()->detach();
+
              $event->tags()->detach();
              $event->specialzations()->detach();
              // do the rest of the cleanup...
