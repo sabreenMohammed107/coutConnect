@@ -27,4 +27,20 @@ function user () {
     // return $this->hasOne(User::class)->latest();
  }
 
+
+
+public function registerType()
+{
+
+    return $this->belongsTo(Register_type::class);
+}
+
+public function phones(){
+    return $this->hasMany(Doctor_phone::class);
+}
+public function country()
+{
+
+    return $this->belongsTo(Country::class);
+}
 }

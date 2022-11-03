@@ -84,6 +84,7 @@
                                 </th>
                                 <th class="min-w-250px">id</th>
                                 <th class="min-w-250px">Name</th>
+                                <th class="min-w-250px">Medical Field</th>
 
 
                                 <th class="text-end min-w-70px">Actions</th>
@@ -118,6 +119,16 @@
                                             <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
                                                 data-kt-ecommerce-category-filter="category_name">
                                                 {{ $row->specialize_name }}</a>
+
+
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="d-flex">
+
+
+                                                {{ $row->field->field_enname ?? '' }}
 
 
                                         </div>
@@ -242,7 +253,27 @@
                                                         <!--end::Input group-->
 
 
-
+ <!--begin::Label-->
+ <label class="fs-6 fw-bold form-label mt-3">
+    <option value="">Select a Field...</option>
+    <i class="fas fa-exclamation-circle ms-1 fs-7"
+        data-bs-toggle="tooltip"
+        title="Interviewer who conducts the meeting with the interviewee"></i>
+</label>
+<!--end::Label-->
+<select name="medicine_field_id" aria-label="Select a Medical Field"
+    data-control="select2" data-placeholder="Select a Medical Field..."
+    data-dropdown-parent="#kt_modal_new_targetEdit{{ $row->id }}"
+    class="form-select form-select-solid fw-bolder">
+    <option value=""></option>
+    @foreach ($medicalFields as $field)
+        <option value="{{ $field->id }}"
+            {{ $row->medicine_field_id == $field->id ? 'selected' : '' }}>
+            {{ $field->field_enname }}</option>
+    @endforeach
+</select>
+</div>
+<!--end::Input group-->
 
                                                         <!--begin::Actions-->
                                                         <div class="text-center">
@@ -343,7 +374,25 @@
                         </div>
                         <!--end::Input group-->
 
-
+    <!--begin::Input group-->
+    <div class="fv-row mb-7">
+        <!--begin::Label-->
+        <label class="fs-6 fw-bold form-label mt-3">
+            <option value="">Select Field..</option>
+            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                title="Interviewer who conducts the meeting with the interviewee"></i>
+        </label>
+        <!--end::Label-->
+        <select name="medicine_field_id" aria-label="Select a Medical Field" data-control="select2"
+            data-placeholder="Select a Medical Field..." data-dropdown-parent="#kt_modal_new_target"
+            class="form-select form-select-solid fw-bolder">
+            <option value=""></option>
+            @foreach ($medicalFields as $field)
+                <option value="{{ $field->id }}">{{ $field->field_enname }}</option>
+            @endforeach
+        </select>
+    </div>
+    <!--end::Input group-->
 
 
 

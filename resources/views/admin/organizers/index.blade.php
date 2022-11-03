@@ -30,191 +30,174 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
-            <!--begin::Category-->
             <div class="card card-flush">
-                <!--begin::Card header-->
-                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-                    <!--begin::Card title-->
-                    <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                            <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
-                                        rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                    <path
-                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            <input type="text" data-kt-ecommerce-category-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Field" />
+
+                <form id="search-form" class="form d-flex flex-column flex-lg-row">
+
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-wrap gap-5">
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mt-3"> Name Or Email</label>
+                                <!--end::Label-->
+
+                                <input type="text" id="name" name="name" class="form-control "
+                                    placeholder="name or email" value="" />
+                            </div>
                         </div>
-                        <!--end::Search-->
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-wrap gap-5">
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <option value=""> Status </option>
+                                    {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select form-select-solid" id="status_id" name="status_id"
+                                    data-control="select2" data-placeholder="Select an option">
+                                    <option value=""></option>
+                                    @foreach ($status as $obj)
+                                        <option value="{{ $obj->id }}">{{ $obj->status }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <option value=""> License</option>
+                                    {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select form-select-solid" id="licence_id" name="licence_id"
+                                    data-control="select2" data-placeholder=" license ">
+                                    <option value=""></option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">NO</option>
+
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+
+
+
+
+
+
+
+                        </div>
+                        <!--second row -->
+                        <div class="d-flex flex-wrap gap-5">
+
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <option value="">Start Date</option>
+                                    {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                </label>
+                                <!--end::Label-->
+                                <input type="date" id="created_start" name="created_start" class="form-control dpick"
+                                    placeholder="start date" />
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <option value="">End Date</option>
+                                    {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                </label>
+                                <!--end::Label-->
+                                <input type="date" id="created_end" name="created_end" class="form-control dpick"
+                                    placeholder="End date" />
+                            </div>
+                            <!--end::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <div class="fs-6 fw-bold form-label mt-5">
+                                    <!--begin::Button-->
+                                    <button type="reset" id="kt_ecommerce_add_product_cancel"
+                                        class="btn btn-light mt-5">Reset</button>
+                                    <!--end::Button-->
+                                    <!--begin::Button-->
+                                    <button onclick="$('#search-form').submit()" class="btn btn-primary mt-5">
+                                        <span class="indicator-label">Filter</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                    <!--end::Button-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--end second row -->
                     </div>
-                    <!--end::Card title-->
-                    <!--begin::Card toolbar-->
-                    <div class="card-toolbar">
-                        <!--begin::Add customer-->
-                      	<!--begin::Add product-->
-											<a href="{{ route('organizers.create') }}" class="btn btn-primary">Create Business Page</a>
-											<!--end::Add product-->
-
-                        <!--end::Add customer-->
-                    </div>
-                    <!--end::Card toolbar-->
-                </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-
-                       <!--begin::Table-->
-                       <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
-                        <!--begin::Table head-->
-                        <thead>
-                            <!--begin::Table row-->
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_ecommerce_category_table .form-check-input"
-                                            value="1" />
-                                    </div>
-                                </th>
-                                <th class="min-w-200px">Name</th>
-                                <th class="text-end min-w-100px">status</th>
-                                <th class="text-end min-w-70px">Email</th>
-                                <th class="text-end min-w-100px">Creation Date</th>
-
-                                <th class="text-end min-w-100px">Last Update</th>
-                                <th class="text-end min-w-100px">License</th>
-                                <th class="text-end min-w-70px">Actions</th>
-                            </tr>
-                            <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        <tbody class="fw-bold text-gray-600">
-                            @foreach ($rows as $index => $row)
-     <!--begin::Table row-->
-     <tr>
-        <!--begin::Checkbox-->
-        <td>
-            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                <input class="form-check-input" type="checkbox" value="1" />
+                </form>
             </div>
-        </td>
-        <!--end::Checkbox-->
-        <!--begin::Category=-->
-        <td>
-            <div class="d-flex align-items-center">
-                <!--begin::Thumbnail-->
-                <a href="#"
-                    class="symbol symbol-50px">
-                    <span class="symbol-label"
 
-                        style="background-image:url({{ asset('uploads/organizers') }}/{{ $row->img }});"></span>
-                </a>
-                <!--end::Thumbnail-->
-                <div class="ms-5">
-                    <!--begin::Title-->
-                    <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                    data-kt-ecommerce-category-filter="category_name" >{{ $row->name }}</a>
-                    <!--end::Title-->
-                </div>
-            </div>
-        </td>
-        <!--end::Category=-->
-        <!--begin::SKU=-->
-        <td class="text-end pe-0">
-            <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->status->status ?? '' }}</span>
-        </td>
-        <!--end::SKU=-->
-        <!--begin::Qty=-->
-        <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->email }}</span>
-        </td>
-        <!--end::Qty=-->
-        <!--begin::Price=-->
-        <td class="text-end pe-0">
-            <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->created_at))}}</span>
-        </td>
-        <!--end::Price=-->
-
-         <!--begin::Price=-->
-         <td class="text-end pe-0">
-            <span class="fw-bolder text-dark">{{date('d-m-Y', strtotime($row->updated_at))}}</span>
-        </td>
-        <!--end::Price=-->
-
-        <!--begin::Status=-->
-        <td class="text-end pe-0" data-order="Inactive">
-            <!--begin::Badges-->
-            <div class="badge badge-light-danger">{{ $row->licence_file }}</div>
-            <!--end::Badges-->
-        </td>
-        <!--end::Status=-->
-        <!--begin::Action=-->
-        <td class="text-end">
-            <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                <span class="svg-icon svg-icon-5 m-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                            fill="black" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-            </a>
-            <!--begin::Menu-->
-            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                data-kt-menu="true">
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                    <a href="{{ route('organizers.edit', $row->id) }}"
-                        class="menu-link px-3">Edit</a>
-                </div>
-                <!--end::Menu item-->
-                 <!--begin::Menu item-->
-                 <div class="menu-item px-3">
-                    <a href="#" class="menu-link px-3"
-                        data-kt-ecommerce-category-filter="delete_row">Delete</a>
+            <!--begin::Category-->
+            <div id="preIndex" class="card card-flush">
+                <!--begin::Card header-->
+                @include('admin.organizers.preIndex')
 
 
-        <form id="delete_{{$row->id}}" action="{{ route('organizers.destroy', $row->id) }}"  method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
 
-        <button type="submit" value=""></button>
-        </form>
-                </div>
-                <!--end::Menu item-->
-            </div>
-            <!--end::Menu-->
-        </td>
-        <!--end::Action=-->
-    </tr>
-    <!--end::Table row-->
-@endforeach
-
-
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
-                    <!--end::Table-->
-                </div>
-                <!--end::Card body-->
             </div>
             <!--end::Category-->
         </div>
         <!--end::Container-->
     </div>
     <!--end::Post-->
+@endsection
+@section('scripts')
+<script>
+     $('#search-form').on('submit', function(e) {
+            name = $('#name').val();
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                data: {
+
+                    name: $('#name').val(),
+                    status_id: $('#status_id option:selected').val(),
+                    licence_id: $('#licence_id option:selected').val(),
+
+                    created_start: $('#created_start').val(),
+                    created_end: $('#created_end').val(),
+
+
+                },
+                url: "{{ route('organize-filter') }}",
+
+                success: function(result) {
+                    console.log(result)
+
+                    $('#preIndex').html(result);
+
+                    $('#name').val(name);
+
+                    $('#kt_ecommerce_category_table').DataTable({
+
+                        "paging": true,
+
+                    });
+
+
+
+
+
+
+                },
+                error: function(request, status, error) {
+                    console.log("error")
+
+
+
+                }
+            });
+        });
+</script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Specialzation;
 use App\Http\Requests\StoreSpecialzationRequest;
 use App\Http\Requests\UpdateSpecialzationRequest;
+use App\Models\Medicine_field;
 use Illuminate\Database\QueryException;
 use File;
 class SpecialzationController extends Controller
@@ -35,8 +36,8 @@ class SpecialzationController extends Controller
     {
         $rows=Specialzation::orderBy("created_at", "Desc")->get();
 
-
-        return view($this->viewName.'index', compact('rows'));
+$medicalFields=Medicine_field::all();
+        return view($this->viewName.'index', compact('rows','medicalFields'));
     }
 
     /**

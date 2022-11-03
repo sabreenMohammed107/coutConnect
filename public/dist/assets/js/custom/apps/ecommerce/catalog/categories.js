@@ -11,6 +11,7 @@ var KTAppEcommerceCategories = function() {
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             "info": false,
+            "searching": false,
             'order': [],
             'pageLength': 10,
             'columnDefs': [
@@ -64,21 +65,24 @@ var KTAppEcommerceCategories = function() {
                     }
                 }).then(function(result) {
                     if (result.value) {
-                        Swal.fire({
-                            text: "You have deleted " + categoryName + "!.",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        }).then(function() {
-                            // Remove current row
-                            console.log('here' + categoryName)
-                            $('#delete_' + categoryId).submit();
-                            datatable.row($(parent)).remove().draw();
+                        console.log('here' + categoryName)
+                        $('#delete_' + categoryId).submit();
+                        datatable.row($(parent)).remove().draw();
+                        // Swal.fire({
+                        //     text: "You have deleted " + categoryName + "!.",
+                        //     icon: "success",
+                        //     buttonsStyling: false,
+                        //     confirmButtonText: "Ok, got it!",
+                        //     customClass: {
+                        //         confirmButton: "btn fw-bold btn-primary",
+                        //     }
+                        // }).then(function() {
+                        //     // Remove current row
+                        //     console.log('here' + categoryName)
+                        //     $('#delete_' + categoryId).submit();
+                        //     datatable.row($(parent)).remove().draw();
 
-                        });
+                        // });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
                             text: categoryName + " was not deleted.",
@@ -95,7 +99,6 @@ var KTAppEcommerceCategories = function() {
         });
     }
 
-
     // Public methods
     return {
         init: function() {
@@ -106,7 +109,7 @@ var KTAppEcommerceCategories = function() {
             }
 
             initDatatable();
-            handleSearchDatatable();
+            // handleSearchDatatable();
             handleDeleteRows();
         }
     };

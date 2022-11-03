@@ -34,7 +34,7 @@
                 action="{{ route('organizers.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-450px mb-7 me-lg-10">
                     <!--begin::Thumbnail settings-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -101,14 +101,14 @@
                         <div class="card-body pt-0">
                             <!--begin::Input group-->
                             <!--begin::Label-->
-                            <label class="form-label">Doctors</label>
+                            <label class="required form-label">Doctors</label>
                             <!--end::Label-->
                             <!--begin::Select2-->
-                            <select class="form-select mb-2" name="doctor_id" data-control="select2"
-                                data-placeholder="Select an option">
+                            <select class="form-select mb-2 @error('doctor_id') is-invalid @enderror" id="doctor_id"
+                                name="doctor_id" data-control="select2" data-placeholder="Select an option">
                                 <option></option>
                                 @foreach ($doctors as $doctor)
-                                    <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                    <option value="{{ $doctor->id }}">{{ $doctor->name}} -  {{ $doctor->email }}</option>
                                 @endforeach
 
                             </select>
@@ -127,7 +127,7 @@
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
-                            <div class="card-title">
+                            <div class="required card-title">
                                 <h2>Phones</h2>
                             </div>
                             <!--end::Card title-->
@@ -145,8 +145,9 @@
 
                                                 <div class="col-md-10">
                                                     {{-- <label class="form-label">Phone:</label> --}}
-                                                    <input type="tel" name="phones" class="form-control "
-                                                        placeholder="Enter phone number" />
+                                                    <input type="tel" name="phones"
+                                                        class="form-control @error('phones') is-invalid @enderror "
+                                                        placeholder=" phone " />
                                                 </div>
 
                                                 <div class="col-md-2 ">
@@ -201,10 +202,15 @@
                                 <label class="required form-label">Organize Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="name" class="form-control mb-2" placeholder="Organize name"
-                                    value="" />
+                                <input type="text" name="name"
+                                    class="form-control mb-2 @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" autocomplete="name" autofocus>
                                 <!--end::Input-->
-
+                                {{-- @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror --}}
                             </div>
                             <!--begin::Tax-->
                             <div class="d-flex flex-wrap gap-5">
@@ -215,49 +221,50 @@
                                     <label class="required form-label">Email</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="email" name="email" class="form-control mb-2" placeholder="email"
-                                        value="" />
+                                    <input type="email" id="email" name="email"
+                                        class="form-control mb-2 @error('email') is-invalid @enderror" name="name"
+                                        value="{{ old('email') }}" autocomplete="email" autofocus>
                                     <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--end:Tax-->
-                            <!--begin::Tax-->
-                            <div class="d-flex flex-wrap gap-5">
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Website</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="website" class="form-control mb-2" placeholder="website"
-                                        value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <!--begin::Label-->
-                                    <label class="required form-label">Fb Account</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="fb_account" class="form-control mb-2"
-                                        placeholder="fb account" value="" />
+                                    {{-- @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
                             </div>
                             <!--end:Tax-->
 
+
+                            <!--begin::Input group-->
+                            {{-- <div> --}}
+                            <!--begin::Label-->
+                            {{-- <label class="form-label">Overview</label> --}}
+                            <!--end::Label-->
+                            <!--begin::Editor-->
+                            {{-- <textarea id="kt_docs_tinymce_basic"  class="tox-target" name="overview" --}}
+                            {{-- placeholder="Type Organizer Overview"></textarea> --}}
+                            <!--end::Editor-->
+
+                            {{-- </div> --}}
+                            <!--end::Input group-->
                             <!--begin::Input group-->
                             <div>
                                 <!--begin::Label-->
-                                <label class="form-label">Overview</label>
+                                <label class="required form-label">Bussiness Field</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <textarea class="form-control form-control-solid" rows="3" name="overview"
-                                    placeholder="Type Organizer Overview"></textarea>
-                                <!--end::Editor-->
 
+
+                                <textarea class="form-control form-control-solid  @error('bussiness_field') is-invalid @enderror" rows="3"
+                                    name="bussiness_field" placeholder="Type Bussiness Field">{{ old('bussiness_field') }}</textarea>
+                                <!--end::Editor-->
+                                {{-- @error('bussiness_field')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror --}}
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -313,68 +320,37 @@
                                     <!--end::Input-->
                                     <!--end::Option-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Row-->
-                        </div>
-                        <!--end::Card header-->
 
-
-                        <!--end::Card header-->
-                    </div>
-                    <!--end::Social options-->
-                    <!--begin::others options-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <div class="card-title">
-                                {{-- <h2>Social links</h2> --}}
-                            </div>
-                            <!--begin::Row-->
-                            <!--begin::Card body-->
-                            <div class="card-body pt-0">
-
-                                <!--end::Input group-->
-                                <div class="d-flex flex-wrap gap-5">
-
+                                <!--begin::Tax-->
+                                <div class="col">
                                     <!--begin::Input group-->
                                     <div class="fv-row w-100 flex-md-root">
-                                        <!--begin::Label-->
-                                        <label class="required form-label">status</label>
+                                        <label class=" form-label">Website</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <!--begin::Select2-->
-                                        <select class="form-select mb-2" name="status_id" data-control="select2"
-                                            data-placeholder="Select an option">
-                                            <option></option>
-                                            @foreach ($status as $type)
-                                                <option value="{{ $type->id }}">{{ $type->status }}</option>
-                                            @endforeach
-
-                                        </select>
-                                        <!--end::Select2-->
+                                        <input type="text" name="website" class="form-control mb-2"
+                                            placeholder="website" value="" />
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="col">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <!--begin::Label-->
+                                        <label class=" form-label">Fb Account</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="text" name="fb_account" class="form-control mb-2"
+                                            placeholder="fb account" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
                                 </div>
                                 <!--end:Tax-->
-
-
-                                <!--begin::Input group-->
-                                <div>
-                                    <!--begin::Label-->
-                                    <label class="form-label">Bussiness Field</label>
-                                    <!--end::Label-->
-                                    <!--begin::Editor-->
-                                    <textarea class="form-control form-control-solid" rows="3" name="bussiness_field"
-                                        placeholder="Type Bussiness Field"></textarea>
-                                    <!--end::Editor-->
-
-                                </div>
-                                <!--end::Input group-->
                             </div>
-                            <!--end::Card header-->
                             <!--end::Row-->
+
                         </div>
                         <!--end::Card header-->
 
@@ -382,6 +358,7 @@
                         <!--end::Card header-->
                     </div>
                     <!--end::Social options-->
+
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
                         <a href="{{ route('organizers.index') }}" id="kt_ecommerce_add_product_cancel"
@@ -405,8 +382,14 @@
 @endsection
 @section('scripts')
     {{-- <script src="{{asset('dist/assets/js/custom/apps/ecommerce/catalog/save-product.js')}}"></script> --}}
+    <script src="{{ asset('dist/assets/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: 'textarea',
 
+            height: 100,
+
+        });
         $('#kt_docs_repeater_basic1').repeater({
             initEmpty: false,
 
@@ -421,6 +404,44 @@
             hide: function(deleteElement) {
                 $(this).slideUp(deleteElement);
             }
+        });
+
+
+        $(document).ready(function() {
+            $('#doctor_id').on('change', function() {
+
+                var select_value = $('#doctor_id option:selected').val();
+
+
+                $.ajax({
+                    type: 'GET',
+                    data: {
+
+                        select_value: select_value,
+
+
+                    },
+                    url: "{{ route('selectDoctorMail.fetch') }}",
+
+                    success: function(data) {
+                        var result = $.parseJSON(data);
+
+                        $("#email").val(result[0]);
+
+
+
+                    },
+                    error: function(request, status, error) {
+                        $("#email").val(' ');
+
+
+
+                    }
+                });
+
+
+            });
+
         });
     </script>
 @endsection

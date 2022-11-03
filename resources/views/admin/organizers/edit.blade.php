@@ -36,8 +36,8 @@
                 @method('PUT')
                 <!--begin::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-                      <!--begin::Thumbnail settings-->
-                      <div class="card card-flush py-4">
+                    <!--begin::Thumbnail settings-->
+                    <div class="card card-flush py-4">
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
@@ -90,14 +90,16 @@
                         <div class="card-body pt-0">
                             <!--begin::Input group-->
                             <!--begin::Label-->
-                            <label class="form-label">Doctors</label>
+                            <label class="required form-label">Doctors</label>
                             <!--end::Label-->
                             <!--begin::Select2-->
-                            <select class="form-select mb-2" name="doctor_id" data-control="select2"
-                                data-placeholder="Select an option">
+                            <select required class=" form-select mb-2 @error('doctor_id') is-invalid @enderror"
+                                id="doctor_id" name="doctor_id" data-control="select2" data-placeholder="Select an option">
                                 <option></option>
                                 @foreach ($doctors as $doctor)
-                                    <option value="{{ $doctor->id }}" {{ $organizer->doctor_id == $doctor->id ? 'selected' : '' }} >{{ $doctor->name }}</option>
+                                    <option value="{{ $doctor->id }}"
+                                        {{ $organizer->doctor_id == $doctor->id ? 'selected' : '' }}>{{ $doctor->name }} -
+                                        {{ $doctor->email }}</option>
                                 @endforeach
 
                             </select>
@@ -116,7 +118,7 @@
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
-                            <div class="card-title">
+                            <div class="required card-title">
                                 <h2>Phones</h2>
                             </div>
                             <!--end::Card title-->
@@ -130,42 +132,44 @@
                                 <div class="form-group">
                                     <div data-repeater-list="kt_docs_repeater_basic1">
 
-                                        @if ($organizer->organizers->count()>0)
-                                        @foreach ($organizer->organizers as $index=>$organizerPhone)
-                                        <div data-repeater-item>
-                                            <div class="form-group row">
+                                        @if ($organizer->organizers->count() > 0)
+                                            @foreach ($organizer->organizers as $index => $organizerPhone)
+                                                <div data-repeater-item>
+                                                    <div class="form-group row">
 
-                                                <div class="col-md-10">
-                                                    {{-- <label class="form-label">Phone:</label> --}}
-                                                    <input type="tel" name="phones" value="{{$organizerPhone->phone}}" class="form-control "
-                                                        placeholder="Enter phone number" />
-                                                </div>
+                                                        <div class="col-md-10">
+                                                            {{-- <label class="form-label">Phone:</label> --}}
+                                                            <input type="tel" name="phones"
+                                                                value="{{ $organizerPhone->phone }}" class="form-control "
+                                                                placeholder="Enter phone number" />
+                                                        </div>
 
-                                                <div class="col-md-2 ">
-                                                    <a href="javascript:;" data-repeater-delete
-                                                        class="btn btn-sm btn-light-danger ">
-                                                        <i class="la la-trash-o"></i></a>
+                                                        <div class="col-md-2 ">
+                                                            <a href="javascript:;" data-repeater-delete
+                                                                class="btn btn-sm btn-light-danger ">
+                                                                <i class="la la-trash-o"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
+                                            @endforeach
                                         @else
-                                        <div data-repeater-item>
-                                            <div class="form-group row">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
 
-                                                <div class="col-md-10">
-                                                    {{-- <label class="form-label">Phone:</label> --}}
-                                                    <input type="tel" name="phones" class="form-control "
-                                                        placeholder="Enter phone number" />
-                                                </div>
+                                                    <div class="col-md-10">
+                                                        {{-- <label class="form-label">Phone:</label> --}}
+                                                        <input type="tel" name="phones"
+                                                            class="form-control @error('phones') is-invalid @enderror"
+                                                            placeholder="Enter phone number" />
+                                                    </div>
 
-                                                <div class="col-md-2 ">
-                                                    <a href="javascript:;" data-repeater-delete
-                                                        class="btn btn-sm btn-light-danger ">
-                                                        <i class="la la-trash-o"></i></a>
+                                                    <div class="col-md-2 ">
+                                                        <a href="javascript:;" data-repeater-delete
+                                                            class="btn btn-sm btn-light-danger ">
+                                                            <i class="la la-trash-o"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         @endif
                                     </div>
                                 </div>
@@ -212,10 +216,15 @@
                                 <label class="required form-label">Organize Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="name" value="{{ $organizer->name}}" class="form-control mb-2" placeholder="Organize name"
-                                    value="" />
+                                <input type="text" name="name"
+                                    class="form-control mb-2 @error('name') is-invalid @enderror" name="name"
+                                    value="{{$organizer->name}}" autocomplete="name" autofocus>
                                 <!--end::Input-->
-
+                                {{-- @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror --}}
                             </div>
                             <!--begin::Tax-->
                             <div class="d-flex flex-wrap gap-5">
@@ -226,49 +235,50 @@
                                     <label class="required form-label">Email</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="email" value="{{ $organizer->email}}" name="email" class="form-control mb-2" placeholder="email"
-                                        value="" />
+                                    <input type="email" id="email" name="email"
+                                        class="form-control mb-2 @error('email') is-invalid @enderror" name="name"
+                                        value="{{$organizer->email}}" autocomplete="email" autofocus>
                                     <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--end:Tax-->
-                            <!--begin::Tax-->
-                            <div class="d-flex flex-wrap gap-5">
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Website</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="website" value="{{ $organizer->website}}" class="form-control mb-2" placeholder="website"
-                                        value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <!--begin::Label-->
-                                    <label class="required form-label">Fb Account</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" value="{{ $organizer->fb_account}}" name="fb_account" class="form-control mb-2"
-                                        placeholder="fb account" value="" />
+                                    {{-- @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
                             </div>
                             <!--end:Tax-->
 
+
+                            <!--begin::Input group-->
+                            {{-- <div> --}}
+                            <!--begin::Label-->
+                            {{-- <label class="form-label">Overview</label> --}}
+                            <!--end::Label-->
+                            <!--begin::Editor-->
+                            {{-- <textarea id="kt_docs_tinymce_basic"  class="tox-target" name="overview" --}}
+                            {{-- placeholder="Type Organizer Overview"></textarea> --}}
+                            <!--end::Editor-->
+
+                            {{-- </div> --}}
+                            <!--end::Input group-->
                             <!--begin::Input group-->
                             <div>
                                 <!--begin::Label-->
-                                <label class="form-label">Overview</label>
+                                <label class="required form-label">Bussiness Field</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <textarea class="form-control form-control-solid" rows="3" name="overview"
-                                    placeholder="Type Organizer Overview">{{ $organizer->overview}}</textarea>
-                                <!--end::Editor-->
 
+
+                                <textarea class="form-control form-control-solid  @error('bussiness_field') is-invalid @enderror" rows="3"
+                                    name="bussiness_field" placeholder="Type Bussiness Field">{{$organizer->bussiness_field}}</textarea>
+                                <!--end::Editor-->
+                                {{-- @error('bussiness_field')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror --}}
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -293,7 +303,7 @@
                                     <label class="form-label ">Linkedin Account</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" value="{{ $organizer->linkedin_account}}" class="form-control mb-2" name="linkedin_account"
+                                    <input type="text" class="form-control mb-2" value="{{$organizer->linkedin_account}}" name="linkedin_account"
                                         placeholder="Linkedin Account" />
                                     <!--end::Input-->
                                     <!--end::Option-->
@@ -306,7 +316,7 @@
                                     <label class="form-label">Twitter Account</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" value="{{ $organizer->twitter_account}}" class="form-control mb-2" name="twitter_account"
+                                    <input type="text" class="form-control mb-2" value="{{$organizer->linkedin_account}}" name="twitter_account"
                                         placeholder="Twitter Account" />
                                     <!--end::Input-->
                                     <!--end::Option-->
@@ -319,91 +329,42 @@
                                     <label class="form-label">Youtube Account</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" value="{{ $organizer->youtube_account}}" class="form-control mb-2" name="youtube_account"
+                                    <input type="text" class="form-control mb-2" value="{{$organizer->youtube_account}}" name="youtube_account"
                                         placeholder="Youtube Account" />
                                     <!--end::Input-->
                                     <!--end::Option-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Row-->
-                        </div>
-                        <!--end::Card header-->
 
-
-                        <!--end::Card header-->
-                    </div>
-                    <!--end::Social options-->
-                    <!--begin::others options-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <div class="card-title">
-                                {{-- <h2>Social links</h2> --}}
-                            </div>
-                            <!--begin::Row-->
-                            <!--begin::Card body-->
-                            <div class="card-body pt-0">
-                                <!--begin::Input group-->
-                                {{-- <div class="fv-row mb-2">
-    <!--begin::Dropzone-->
-    <div class="dropzone" id="kt_ecommerce_add_product_media">
-        <!--begin::Message-->
-        <div class="dz-message needsclick">
-            <!--begin::Icon-->
-            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-            <!--end::Icon-->
-            <!--begin::Info-->
-            <div class="ms-4">
-                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop licence file here or click to upload.</h3>
-
-            </div>
-            <!--end::Info-->
-        </div>
-    </div>
-    <!--end::Dropzone-->
-</div> --}}
-                                <!--end::Input group-->
-                                <div class="d-flex flex-wrap gap-5">
-
+                                <!--begin::Tax-->
+                                <div class="col">
                                     <!--begin::Input group-->
                                     <div class="fv-row w-100 flex-md-root">
-                                        <!--begin::Label-->
-                                        <label class="required form-label">status</label>
+                                        <label class=" form-label">Website</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <!--begin::Select2-->
-                                        <select class="form-select mb-2" name="status_id" data-control="select2"
-                                            data-placeholder="Select an option">
-                                            <option></option>
-                                            @foreach ($status as $type)
-                                                <option value="{{ $type->id }}" {{ $organizer->status_id == $type->id ? 'selected' : '' }} >{{ $type->status }}</option>
-                                            @endforeach
-
-                                        </select>
-                                        <!--end::Select2-->
+                                        <input type="text" name="website" class="form-control mb-2"
+                                            placeholder="website" value="{{$organizer->website}}" />
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="col">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <!--begin::Label-->
+                                        <label class=" form-label">Fb Account</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="text" name="fb_account" class="form-control mb-2"
+                                            placeholder="fb account" value="{{$organizer->fb_account}}" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
                                 </div>
                                 <!--end:Tax-->
-
-
-                                <!--begin::Input group-->
-                                <div>
-                                    <!--begin::Label-->
-                                    <label class="form-label">Bussiness Field</label>
-                                    <!--end::Label-->
-                                    <!--begin::Editor-->
-                                    <textarea class="form-control form-control-solid" rows="3" name="bussiness_field"
-                                        placeholder="Type Bussiness Field">{{ $organizer->bussiness_field}}</textarea>
-                                    <!--end::Editor-->
-
-                                </div>
-                                <!--end::Input group-->
                             </div>
-                            <!--end::Card header-->
                             <!--end::Row-->
+
                         </div>
                         <!--end::Card header-->
 
@@ -411,6 +372,7 @@
                         <!--end::Card header-->
                     </div>
                     <!--end::Social options-->
+
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
                         <a href="{{ route('organizers.index') }}" id="kt_ecommerce_add_product_cancel"
@@ -434,22 +396,59 @@
 @endsection
 @section('scripts')
     {{-- <script src="{{asset('dist/assets/js/custom/apps/ecommerce/catalog/save-product.js')}}"></script> --}}
-    <script>
+                                <script>
+                                    $('#kt_docs_repeater_basic1').repeater({
+                                        initEmpty: false,
 
-        $('#kt_docs_repeater_basic1').repeater({
-            initEmpty: false,
+                                        defaultValues: {
+                                            'text-input': 'foo'
+                                        },
 
-            defaultValues: {
-                'text-input': 'foo'
-            },
+                                        show: function() {
+                                            $(this).slideDown();
+                                        },
 
-            show: function() {
-                $(this).slideDown();
-            },
+                                        hide: function(deleteElement) {
+                                            $(this).slideUp(deleteElement);
+                                        }
+                                    });
 
-            hide: function(deleteElement) {
-                $(this).slideUp(deleteElement);
-            }
-        });
-    </script>
-@endsection
+
+                                    $(document).ready(function() {
+                                        $('#doctor_id').on('change', function() {
+
+                                            var select_value = $('#doctor_id option:selected').val();
+
+
+                                            $.ajax({
+                                                type: 'GET',
+                                                data: {
+
+                                                    select_value: select_value,
+
+
+                                                },
+                                                url: "{{ route('selectDoctorMail.fetch') }}",
+
+                                                success: function(data) {
+                                                    var result = $.parseJSON(data);
+
+                                                    $("#email").val(result[0]);
+
+
+
+                                                },
+                                                error: function(request, status, error) {
+                                                    $("#email").val(' ');
+
+
+
+                                                }
+                                            });
+
+
+                                        });
+
+                                    });
+                                </script>
+                            @endsection

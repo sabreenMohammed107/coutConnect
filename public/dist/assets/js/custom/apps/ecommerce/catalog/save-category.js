@@ -293,7 +293,7 @@ var KTAppEcommerceSaveCategory = function() {
             initTagify();
             initFormRepeater();
             initConditionsSelect2();
-            initDropzone();
+            // initDropzone();
             // Handle forms
             handleStatus();
             handleConditions();

@@ -1,16 +1,17 @@
 "use strict";
 
 // Class definition
-var KTAppEcommerceCategories = function () {
+var KTAppEcommerceCategories = function() {
     // Shared variables
     var table;
     var datatable;
 
     // Private functions
-    var initDatatable = function () {
+    var initDatatable = function() {
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             "info": false,
+            "searching": false,
             'order': [],
             'pageLength': 10,
             'columnDefs': [
@@ -20,7 +21,7 @@ var KTAppEcommerceCategories = function () {
         });
 
         // Re-init functions on datatable re-draws
-        datatable.on('draw', function () {
+        datatable.on('draw', function() {
             handleDeleteRows();
         });
     }
@@ -28,7 +29,7 @@ var KTAppEcommerceCategories = function () {
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
     var handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-ecommerce-category-filter="search"]');
-        filterSearch.addEventListener('keyup', function (e) {
+        filterSearch.addEventListener('keyup', function(e) {
             datatable.search(e.target.value).draw();
         });
     }
@@ -40,7 +41,7 @@ var KTAppEcommerceCategories = function () {
 
         deleteButtons.forEach(d => {
             // Delete button on click
-            d.addEventListener('click', function (e) {
+            d.addEventListener('click', function(e) {
                 e.preventDefault();
 
                 // Select parent row
@@ -61,7 +62,7 @@ var KTAppEcommerceCategories = function () {
                         confirmButton: "btn fw-bold btn-danger",
                         cancelButton: "btn fw-bold btn-active-light-primary"
                     }
-                }).then(function (result) {
+                }).then(function(result) {
                     if (result.value) {
                         Swal.fire({
                             text: "You have deleted " + categoryName + "!.",
@@ -71,7 +72,7 @@ var KTAppEcommerceCategories = function () {
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             }
-                        }).then(function () {
+                        }).then(function() {
                             // Remove current row
                             datatable.row($(parent)).remove().draw();
                         });
@@ -94,7 +95,7 @@ var KTAppEcommerceCategories = function () {
 
     // Public methods
     return {
-        init: function () {
+        init: function() {
             table = document.querySelector('#kt_ecommerce_category_table');
 
             if (!table) {
@@ -109,6 +110,6 @@ var KTAppEcommerceCategories = function () {
 }();
 
 // On document ready
-KTUtil.onDOMContentLoaded(function () {
+KTUtil.onDOMContentLoaded(function() {
     KTAppEcommerceCategories.init();
 });

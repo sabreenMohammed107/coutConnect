@@ -34,6 +34,64 @@ License: For each use you must have a valid license purchased only from above li
        <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
+        <!--begin::Page-->
+        @if(Session::has('flash_del'))
+
+        <div class="position-fixed top-0 end-0 p-3 z-index-3">
+       <div class="toast show "  role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <span class="svg-icon svg-icon-2 svg-icon-primary me-3"></span>
+            <strong class="me-auto">Good job!</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+
+            {{Session::get('flash_del')}}
+        </div>
+     </div>
+        </div>
+      @endif
+      @if(Session::has('flash_danger'))
+
+      <div class="position-fixed top-0 end-0 p-3 z-index-3">
+      <div class="toast show "  role="alert" aria-live="assertive" aria-atomic="true">
+       <div class="toast-header">
+           <span class="svg-icon svg-icon-2 svg-icon-primary me-3"></span>
+           <strong class="me-auto">Error Deleting data !</strong>
+           {{-- <small>11 mins ago</small> --}}
+           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+       </div>
+       <div class="toast-body">
+           {{-- Hello, world! This is a toast message. --}}
+           {{Session::get('flash_danger')}}
+       </div>
+    </div>
+      </div>
+     @endif
+     @if($errors->any())
+    {{-- {{ implode('', $errors->all('<div>:message</div>')) }} --}}
+    <div class="position-fixed top-0 end-0 p-3 z-index-3">
+        <div class="toast show "  role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+             <span class="svg-icon svg-icon-2 svg-icon-primary me-3"></span>
+             <strong class="me-auto">Validate Data Errors !</strong>
+             {{-- <small>11 mins ago</small> --}}
+             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+             {{-- Hello, world! This is a toast message. --}}
+             {{-- {{Session::get('flash_danger')}} --}}
+             @foreach ( $errors->all() as $err)
+                 <div>
+                    {{$err}}
+                 </div>
+             @endforeach
+             {{-- {{ implode('', $errors->all(':message'))}} --}}
+         </div>
+      </div>
+        </div>
+@endif
     <div class="page d-flex flex-row flex-column-fluid">
         @section('breadcrumb')
         <div class="toolbar" id="kt_toolbar">

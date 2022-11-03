@@ -10,6 +10,7 @@ class Specialzation extends Model
     use HasFactory;
     protected $fillable = [
         'specialize_name',
+        'medicine_field_id'
 
     ];
 
@@ -17,5 +18,9 @@ class Specialzation extends Model
     public function events()
     {
         return $this->belongsToMany(Event::class, 'events_specialzations_fees','specialize_id','event_id');
+    }
+    public function field()
+    {
+        return $this->belongsTo(Medicine_field::class,'medicine_field_id');
     }
 }

@@ -106,10 +106,10 @@
                                     <!--end::Checkbox-->
                                     <td>
                                         <div class="d-flex">
-                                        <input type="hidden" data-kt-ecommerce-category-filter="category_id"
-                                            value="{{ $row->id }}">
-                                        {{ $index + 1 }}
-                                    </div>
+                                            <input type="hidden" data-kt-ecommerce-category-filter="category_id"
+                                                value="{{ $row->id }}">
+                                            {{ $index + 1 }}
+                                        </div>
                                     </td>
                                     <td>
 
@@ -147,7 +147,7 @@
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
                                                 <a data-bs-toggle="modal"
-                                                    data-bs-target="#kt_modal_new_targetEdit{{$row->id}}"
+                                                    data-bs-target="#kt_modal_new_targetEdit{{ $row->id }}"
                                                     class="menu-link px-3">Edit</a>
                                             </div>
                                             <!--end::Menu item-->
@@ -158,7 +158,7 @@
 
 
                                                 <form id="delete_{{ $row->id }}"
-                                                    action="{{ route('cities.destroy',$row->id) }}" method="POST"
+                                                    action="{{ route('cities.destroy', $row->id) }}" method="POST"
                                                     style="display: none;">
                                                     @csrf
                                                     {{-- <input type="hidden" name="_method" value="delete"> --}}
@@ -176,8 +176,8 @@
 
 
                                     <!--begin::Modal - New Target-->
-                                    <div class="modal fade" id="kt_modal_new_targetEdit{{$row->id}}"
-                                        tabindex="-1" aria-hidden="true">
+                                    <div class="modal fade" id="kt_modal_new_targetEdit{{ $row->id }}" tabindex="-1"
+                                        aria-hidden="true">
                                         <!--begin::Modal dialog-->
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
                                             <!--begin::Modal content-->
@@ -208,13 +208,12 @@
                                                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                                     <!--begin:Form-->
                                                     <form id="kt_modal_update_target_updateForm" class="form"
-                                                        action="{{ route('cities.update', $row->id) }}"
-                                                        method="post">
+                                                        action="{{ route('cities.update', $row->id) }}" method="post">
                                                         @csrf
                                                         @method('PUT')
                                                         <!--begin::Heading-->
-                                                        <input type="hidden" name="city_id"
-                                                            value="{{ $row->id }}" id="">
+                                                        <input type="hidden" name="city_id" value="{{ $row->id }}"
+                                                            id="">
                                                         <div class="mb-13 text-center">
                                                             <!--begin::Title-->
                                                             <h1 class="mb-3">Update cities</h1>
@@ -235,68 +234,74 @@
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                placeholder="Enter City Name"
-                                                                name="name"
+                                                                placeholder="Enter City Name" name="name"
                                                                 value="{{ $row->name }}" />
                                                         </div>
                                                         <!--end::Input group-->
 
 
-   <!--begin::Label-->
-   <label class="fs-6 fw-bold form-label mt-3">
-    <option value="">Select a Country...</option>
-    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
-</label>
-<!--end::Label-->
-<select name="country_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_targetEdit{{$row->id}}" class="form-select form-select-solid fw-bolder">
-    <option value="" ></option>
-    @foreach($countries as $country)
-    <option value="{{$country->id}}" {{$row->country_id == $country->id ? 'selected': ''}}>{{$country->name}}</option>
-    @endforeach
-</select>
-</div>
-<!--end::Input group-->
-
-                                                        <!--begin::Actions-->
-                                                        <div class="text-center">
-                                                            <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                                                style="margin-right: 25px" data-bs-dismiss="modal">
-                                                                <button type="reset" id="kt_modal_update_target_cancel"
-                                                                    class="btn btn-light me-3"
-                                                                    data-dismiss="modal">Cancel</button>
-                                                            </div>
-                                                            <button type="submit" id="kt_modal_update_target_submit"
-                                                                class="btn btn-primary">
-                                                                <span class="indicator-label">Submit</span>
-                                                                <span class="indicator-progress">Please wait...
-                                                                    <span
-                                                                        class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            </button>
-                                                        </div>
-                                                        <!--end::Actions-->
-                                                    </form>
-                                                    <!--end:Form-->
+                                                        <!--begin::Label-->
+                                                        <label class="fs-6 fw-bold form-label mt-3">
+                                                            <option value="">Select a Country...</option>
+                                                            <i class="fas fa-exclamation-circle ms-1 fs-7"
+                                                                data-bs-toggle="tooltip"
+                                                                title="Interviewer who conducts the meeting with the interviewee"></i>
+                                                        </label>
+                                                        <!--end::Label-->
+                                                        <select name="country_id" aria-label="Select a Country"
+                                                            data-control="select2" data-placeholder="Select a Country..."
+                                                            data-dropdown-parent="#kt_modal_new_targetEdit{{ $row->id }}"
+                                                            class="form-select form-select-solid fw-bolder">
+                                                            <option value=""></option>
+                                                            @foreach ($countries as $country)
+                                                                <option value="{{ $country->id }}"
+                                                                    {{ $row->country_id == $country->id ? 'selected' : '' }}>
+                                                                    {{ $country->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                 </div>
-                                                <!--end::Modal body-->
+                                                <!--end::Input group-->
+
+                                                <!--begin::Actions-->
+                                                <div class="text-center">
+                                                    <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                        style="margin-right: 25px" data-bs-dismiss="modal">
+                                                        <button type="reset" id="kt_modal_update_target_cancel"
+                                                            class="btn btn-light me-3"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                    <button type="submit" id="kt_modal_update_target_submit"
+                                                        class="btn btn-primary">
+                                                        <span class="indicator-label">Submit</span>
+                                                        <span class="indicator-progress">Please wait...
+                                                            <span
+                                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    </button>
+                                                </div>
+                                                <!--end::Actions-->
+                                                </form>
+                                                <!--end:Form-->
                                             </div>
-                                            <!--end::Modal content-->
+                                            <!--end::Modal body-->
                                         </div>
-                                        <!--end::Modal dialog-->
+                                        <!--end::Modal content-->
                                     </div>
-                                    <!--end::Modal - New Target-->
-                                </tr>
-                                <!--end::Table row-->
-                            @endforeach
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
-                    <!--end::Table-->
+                                    <!--end::Modal dialog-->
                 </div>
-                <!--end::Card body-->
+                <!--end::Modal - New Target-->
+                </tr>
+                <!--end::Table row-->
+                @endforeach
+                </tbody>
+                <!--end::Table body-->
+                </table>
+                <!--end::Table-->
             </div>
-            <!--end::Category-->
+            <!--end::Card body-->
         </div>
-        <!--end::Container-->
+        <!--end::Category-->
+    </div>
+    <!--end::Container-->
     </div>
     <!--end::Post-->
     <!--begin::Modal - New Target-->
@@ -351,28 +356,31 @@
                                     title="Enter City Name"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid"
-                                placeholder="Enter City Name" name="name" />
+                            <input type="text" class="form-control form-control-solid" placeholder="Enter City Name"
+                                name="name" />
                         </div>
                         <!--end::Input group-->
 
 
-		<!--begin::Input group-->
-        <div class="fv-row mb-7">
-            <!--begin::Label-->
-            <label class="fs-6 fw-bold form-label mt-3">
-                <option value="">Select Country..</option>
-                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
-            </label>
-            <!--end::Label-->
-            <select name="country_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_target" class="form-select form-select-solid fw-bolder">
-                <option value="" ></option>
-                @foreach($countries as $country)
-                <option value="{{$country->id}}">{{$country->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold form-label mt-3">
+                                <option value="">Select Country..</option>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                    title="Interviewer who conducts the meeting with the interviewee"></i>
+                            </label>
+                            <!--end::Label-->
+                            <select name="country_id" aria-label="Select a Country" data-control="select2"
+                                data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_target"
+                                class="form-select form-select-solid fw-bolder">
+                                <option value=""></option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!--end::Input group-->
 
 
 

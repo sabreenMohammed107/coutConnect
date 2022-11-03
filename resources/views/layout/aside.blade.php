@@ -218,7 +218,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Doctors</span>
+                                    <span class="menu-title">Users</span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
@@ -227,7 +227,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Doctors list</span>
+                                            <span class="menu-title">Users list</span>
                                         </a>
                                     </div>
 
@@ -245,7 +245,54 @@
                             </div>
                              <!-- end Doctors -->
 
+  <!-- start Order -->
+  <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+    <span class="menu-link">
+        <span class="menu-bullet">
+            <span class="bullet bullet-dot"></span>
+        </span>
+        <span class="menu-title">Orders</span>
+        <span class="menu-arrow"></span>
+    </span>
+    <div class="menu-sub menu-sub-accordion">
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route('orders.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Orders list</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route('vodafone-cash.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Vodafone cash list</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route('booked-ticket.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Booked Ticket list</span>
+            </a>
+        </div>
 
+        {{-- <div class="menu-item">
+            <a class="menu-link" href="{{ route('events.create') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Add Event</span>
+            </a>
+        </div> --}}
+
+
+    </div>
+</div>
+ <!-- end Order -->
                         <div class="menu-item">
                             <a class="menu-link" href="#">
                                 <span class="menu-icon">

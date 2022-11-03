@@ -210,7 +210,7 @@
                                         data-allow-clear="true">
                                         <option></option>
                                         @foreach ($eventTypes as $eventType)
-                                            <option value="{{ $eventType->id }}">{{ $eventType->event_type }}</option>
+                                            <option value="{{ $eventType->id }}">{{ $eventType->event_enname }}</option>
                                         @endforeach
 
                                     </select>
@@ -229,7 +229,7 @@
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <!--begin::Select2-->
-                                    <select class="form-select form-select-solid" name="status_id" data-control="select2"
+                                    <select class="form-select form-select-solid" name="event_status_id" data-control="select2"
                                         data-placeholder="Select an option">
                                         <option></option>
                                         @foreach ($status as $type)
@@ -331,11 +331,11 @@
                                         <input type="text" name="area" class="form-control mb-2"
                                             placeholder="Event name" value="" />
 
-                                    <!--end::Input group-->
-                                </div>
+                                        <!--end::Input group-->
+                                    </div>
 
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
+                                    <!--begin::Input group-->
+                                    {{-- <div class="fv-row w-100 flex-md-root">
                                     <!--begin::Label-->
                                     <label class="form-label">Rank</label>
                                     <!--end::Label-->
@@ -345,52 +345,52 @@
 
                                     <!--end::Editor-->
 
+                                </div> --}}
+                                    <!--end::Input group-->
                                 </div>
-                                <!--end::Input group-->
+                                <!--end::Card header-->
+                                <!--end::Row-->
+                                {{-- /  </div> --}}
+                                <!--end::Card header-->
+
+
+                                <!--end::Card header-->
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="required form-label">Address Details</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" name="details_address" class="form-control mb-2"
+                                        placeholder="Event name" value="" />
+
+
+                                </div>
+                                <!--end::Input-->
                             </div>
-                            <!--end::Card header-->
-                            <!--end::Row-->
-                      {{-- /  </div> --}}
-                        <!--end::Card header-->
-
-
-                        <!--end::Card header-->
-                           <!--begin::Input group-->
-                           <div class="mb-10 fv-row">
-                            <!--begin::Label-->
-                            <label class="required form-label">Address Details</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" name="details_address" class="form-control mb-2" placeholder="Event name"
-                                value="" />
-
-
+                            <!--end::Social options-->
                         </div>
-                        <!--end::Input-->
+                        <!--end::General options-->
+
+
+                        <div class="d-flex justify-content-end">
+                            <!--begin::Button-->
+                            <a href="{{ route('events.index') }}" id="kt_ecommerce_add_product_cancel"
+                                class="btn btn-light me-5">Cancel</a>
+                            <!--end::Button-->
+                            <!--begin::Button-->
+                            <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                <span class="indicator-label">Save Changes</span>
+                                <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <!--end::Button-->
+                        </div>
                     </div>
-                    <!--end::Social options-->
-                </div>
-                <!--end::General options-->
-
-
-                <div class="d-flex justify-content-end">
-                    <!--begin::Button-->
-                    <a href="{{ route('events.index') }}" id="kt_ecommerce_add_product_cancel"
-                        class="btn btn-light me-5">Cancel</a>
-                    <!--end::Button-->
-                    <!--begin::Button-->
-                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                        <span class="indicator-label">Save Changes</span>
-                        <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                    </button>
-                    <!--end::Button-->
-                </div>
+                    <!--end::Main column-->
+            </form>
         </div>
-        <!--end::Main column-->
-        </form>
-    </div>
-    <!--end::Container-->
+        <!--end::Container-->
     </div>
     <!--end::Post-->
 @endsection

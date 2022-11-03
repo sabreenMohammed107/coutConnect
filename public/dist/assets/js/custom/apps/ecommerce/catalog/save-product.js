@@ -132,7 +132,44 @@ var KTAppEcommerceSaveProduct = function() {
             });
 
         }
-        // Init condition select2
+        //kt_docs_repeater_basic_instructor
+
+
+    const initFormRepeaterInstructors = () => {
+
+        $('#kt_docs_repeater_basic_instructor').repeater({
+            initEmpty: false,
+
+            defaultValues: {
+                'text-input': 'foo'
+            },
+
+            show: function() {
+                $(this).slideDown();
+
+                // Init select2 on new repeated items
+                // initConditionsSelect2();
+                // $(".dPick").flatpickr();
+                // $(".tPick").flatpickr({
+                //     enableTime: true,
+                //     noCalendar: true,
+                //     dateFormat: "H:i",
+                // });
+
+
+                console.log('show');
+            },
+
+            hide: function(deleteElement) {
+                $(this).slideUp(deleteElement);
+                console.log('hide');
+                console.log(deleteElement);
+            }
+        });
+
+    }
+
+    // Init condition select2
     const initConditionsSelect2 = () => {
         // Tnit new repeating condition types
         const allConditionTypes = document.querySelectorAll('[data-kt-ecommerce-catalog-add-product="product_option"]');
@@ -444,6 +481,7 @@ var KTAppEcommerceSaveProduct = function() {
             initFormRepeater();
             // initDropzone();
             initFormRepeaterDays();
+            initFormRepeaterInstructors();
             initConditionsSelect2();
 
             // Handle forms

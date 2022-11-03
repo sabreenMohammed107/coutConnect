@@ -11,7 +11,10 @@ use App\Models\Organizer_status;
 use File;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Redirect;
+use Validator;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 class OrganizerController extends Controller
 {
     protected $object;
@@ -39,8 +42,8 @@ class OrganizerController extends Controller
     public function index()
     {
         $rows = Organizer::orderBy("created_at", "Desc")->get();
-
-        return view($this->viewName . 'index', compact('rows'));
+        $status = Organizer_status::all();
+        return view($this->viewName . 'index', compact('rows','status'));
     }
 
     /**
@@ -63,6 +66,20 @@ class OrganizerController extends Controller
      */
     public function store(StoreOrganizerRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'img' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'bussiness_field' => 'required',
+            'doctor_id' => 'required',
+            'phones' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            // return $this->convertErrorsToString($validator->messages());
+            return Redirect::back()->withErrors($validator);
+        }
         DB::beginTransaction();
         try {
             // Disable foreign key checks!
@@ -73,7 +90,7 @@ class OrganizerController extends Controller
 
                 $input['img'] = $this->UplaodImage($attach_image);
             }
-
+            $input['status_id'] = 1;
             $organizer = Organizer::create($input);
 
             $organizerList = $request->kt_docs_repeater_basic1;
@@ -137,12 +154,26 @@ class OrganizerController extends Controller
      * @param  \App\Models\Organizer  $organizer
      * @return \Illuminate\Http\Response
      */
-    function getResult($first, $second)
-{
-    return $first > $second ? 'Available' : 'Not Available';
-}
+    public function getResult($first, $second)
+    {
+        return $first > $second ? 'Available' : 'Not Available';
+    }
     public function update(UpdateOrganizerRequest $request, Organizer $organizer)
     {
+        $validator = Validator::make($request->all(), [
+
+            'name' => 'required',
+            'email' => 'required',
+            'bussiness_field' => 'required',
+            'doctor_id' => 'required',
+            // 'phones' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            // return $this->convertErrorsToString($validator->messages());
+            return Redirect::back()->withErrors($validator);
+        }
         DB::beginTransaction();
         try {
             // Disable foreign key checks!
@@ -161,22 +192,21 @@ class OrganizerController extends Controller
             $updatedListdel = Organizer_phone::where('organizer_id', $organizer->id)->pluck('phone')->toArray();
 
             //del
-            $diff=[];
+            $diff = [];
             foreach ($organizerList as $index => $opt) {
                 $phone = $organizerList[$index]['phones'];
                 array_push($diff, $phone);
 
-
             }
             //get all differance numbers
             $new_array = array();
-            foreach($diff as $value) {
-                if(!in_array($value, $updatedListdel)) {
+            foreach ($diff as $value) {
+                if (!in_array($value, $updatedListdel)) {
                     array_push($new_array, $value);
                 }
             }
-            foreach($updatedListdel as $value) {
-                if(!in_array($value, $diff)) {
+            foreach ($updatedListdel as $value) {
+                if (!in_array($value, $diff)) {
                     array_push($new_array, $value);
                 }
             }
@@ -188,7 +218,7 @@ class OrganizerController extends Controller
                     $delOrganizerPhone->delete();
                 }
 
-    }
+            }
             //end del
             //add phone
             $updatedList = Organizer_phone::where('organizer_id', $organizer->id)->pluck('phone')->toArray();
@@ -236,7 +266,7 @@ class OrganizerController extends Controller
         $file_name = public_path('uploads/organizers/' . $file);
         try {
             //delete phones
-            foreach($organizer->organizers as $org){
+            foreach ($organizer->organizers as $org) {
                 $org->delete();
             }
             File::delete($file_name);
@@ -269,5 +299,42 @@ class OrganizerController extends Controller
         $file->move($uploadPath, $imageName);
 
         return $imageName;
+    }
+
+
+    public function filter(Request $request)
+    {
+        \Log::info($request->all());
+
+        $name= $request->get('name');
+        //search func
+        $opo=Organizer::select('*');
+        if ($request->get("name") && !empty($request->get("name"))) {
+            $opo->where('name', 'like', '%' . $name . '%')
+            ->orWhere('email', 'like', '%' . $name . '%');
+        }
+        if ($request->get("licence_id") && !empty($request->get("licence_id"))) {
+            if($request->get("licence_id") ==1){
+                $opo->whereNotNull('licence_file');
+            }else{
+                $opo->whereNull('licence_file');
+            }
+
+        }
+        if ($request->get("status_id") && !empty($request->get("status_id"))) {
+            $opo->where('status_id', '=',$request->get("status_id") );
+
+        }
+
+
+        if ($request->get("created_start") && !empty($request->get("created_start"))) {
+            $opo->where('created_at', '>=', Carbon::parse($request->get("created_start")));
+        }
+        if ($request->get("created_end") && !empty($request->get("created_end"))) {
+            $opo->where('created_at', '<=', Carbon::parse($request->get("created_end")));
+        }
+
+        $rows =  $opo->get();
+        return view($this->viewName . 'preIndex', compact('rows'))->render();
     }
 }
